@@ -8,17 +8,23 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          title,
-        ),
-      ),
-      body: const Column(
+      appBar: AppBar(title: Text(title)),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Test value'),
+          Container(
+            child: Center(
+              child: ElevatedButton(
+                onPressed: () => {},
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("Login with 42"),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 }
-

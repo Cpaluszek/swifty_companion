@@ -29,6 +29,24 @@ ThemeData catppuccinTheme(Flavor flavor) {
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       elevation: 0,
-    )
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: flavor.mauve,
+        shadowColor: flavor.crust.withOpacity(0.9),
+        elevation: 5,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 12,
+        ),
+        textStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    ),
   );
 }
