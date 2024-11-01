@@ -1,12 +1,11 @@
 import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/config/env_config.dart';
 import 'package:swifty_companion/config/theme.dart';
 import 'package:swifty_companion/presentation/login/login_screen.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future main() async {
-  await dotenv.load(fileName: ".env");
-  // test
+  await EnvConfig.loadEnv();
   runApp(const MyApp());
 }
 
