@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:swifty_companion/config/env_config.dart';
 import 'package:swifty_companion/config/theme.dart';
 import 'package:swifty_companion/presentation/login/login_screen.dart';
+import 'package:swifty_companion/presentation/second_screen/second_screen.dart';
 
 Future main() async {
   await EnvConfig.loadEnv();
@@ -17,8 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: catppuccinTheme(catppuccin.macchiato),
-      home: MyHomePage(title: 'Swifty Companion'),
+      routes: {
+        '/': (context) => const LoginScreen(title: "Swifty Companion"),
+        '/search': (context) => const SecondScreen(),
+      },
     );
   }
 }

@@ -4,22 +4,32 @@ class EnvConfig {
   // Prevents from object instantiation
   EnvConfig._();
 
-  static late String apiBaseUrl;
-  static late String apiAuthEndpoint;
+  static late String _apiBaseUrl;
+  static late String _apiAuthEndpoint;
 
   static late String apiUid;
   static late String apiSecret;
 
-  static const String authWebRedirect = "http://localhost:3000";
-  static const String authMobileRedirect = "com.cpalusze.swifty_companion";
+  static late String authorizeUrl;
+  static late String tokenUrl;
+
+  static const String mobileUriScheme = "com.cpalusze.switfy_companion";
+  static const String webUriScheme = "http://localhost:52802";
+  static const String _redirectUri = '/';
+
+  static const String authWebRedirect = '$webUriScheme$_redirectUri';
+  static const String authMobileRedirect = '$webUriScheme$_redirectUri';
 
   static Future<void> loadEnv() async {
     await dotenv.load(fileName: ".env");
 
-    apiBaseUrl = _getEnvVar("API_URL");
-    apiAuthEndpoint = _getEnvVar("AUTH_ENDPOINT");
+    _apiBaseUrl = _getEnvVar("API_URL");
+    _apiAuthEndpoint = _getEnvVar("AUTH_ENDPOINT");
     apiUid = _getEnvVar("API_UID");
     apiSecret = _getEnvVar("API_SECRET");
+
+    authorizeUrl = EnvConfig._apiBaseUrl + EnvConfig._apiAuthEndpoint;
+    tokenUrl = '${EnvConfig._apiBaseUrl}/token';
   }
 
   static String _getEnvVar(String key) {

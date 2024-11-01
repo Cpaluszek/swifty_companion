@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   catppuccin_flutter: ^1.0.0
   flutter_dotenv: ^5.2.1
-  oauth2: ^2.0.3
+  oauth2_client: ^3.3.0
 
 dev_dependencies:
   flutter_test:
