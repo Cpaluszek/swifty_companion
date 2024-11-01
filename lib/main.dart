@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: catppuccinTheme(catppuccin.macchiato),
-      home: const MyHomePage(title: 'Swifty Companion'),
+      home: MyHomePage(title: 'Swifty Companion'),
     );
   }
 }
