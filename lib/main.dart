@@ -7,7 +7,7 @@ import 'package:swifty_companion/login/bloc/auth_event.dart';
 import 'package:swifty_companion/login/bloc/auth_state.dart';
 import 'package:swifty_companion/login/view/login.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swifty_companion/second_screen/second_screen.dart';
+import 'package:swifty_companion/home_screen/home_screen.dart';
 import 'package:swifty_companion/splash_page.dart';
 
 Future main() async {
@@ -52,7 +52,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
           listener: (context, state) {
             if (state is AuthSuccess) {
               _navigator.pushAndRemoveUntil<void>(
-                SecondScreen.route(
+                HomeScreen.route(
                   state.accessToken,
                   state.refreshToken,
                   state.expiration,

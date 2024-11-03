@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:swifty_companion/login/bloc/auth_event.dart';
 import 'package:swifty_companion/login/bloc/auth_state.dart';
 import 'package:swifty_companion/config/env_config.dart';
-import 'package:oauth2/oauth2.dart' as oauth2;
-import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
+import 'package:oauth2_client/access_token_response.dart';
+import 'package:oauth2_client/oauth2_client.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
@@ -19,19 +16,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       LoginRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
+    final client = OAuth2Client(
+      authorizeUrl: EnvConfig.authorizeUrl,
+      tokenUrl: EnvConfig.tokenUrl,
+      redirectUri: EnvConfig.redirectUri,
+      customUriScheme: EnvConfig.uriScheme,
+    );
     try {
-      final client = await oauth2.clientCredentialsGrant(
-        Uri.parse(EnvConfig.tokenUrl),
-        EnvConfig.apiUid,
-        EnvConfig.apiSecret,
-        httpClient: http.Client(),
+      AccessTokenResponse? token = await client.getTokenWithAuthCodeFlow(
+        clientId: EnvConfig.apiUid,
+        clientSecret: EnvConfig.apiSecret,
+        scopes: ['public'],
       );
-      Logger logger = Logger();
-      logger.i(jsonEncode(client.credentials));
-
-      final accessToken = client.credentials.accessToken;
-      final refreshToken = client.credentials.refreshToken ?? '';
-      final expiration = client.credentials.expiration ?? DateTime(0);
+      // TODO: manage token expiration
+      // if (token.isExpired()) {
+      //   await _oAuth2helper.refreshToken(token);
+      //   token = await _oAuth2helper.getToken();
+      // }
+      final accessToken = token.accessToken ?? '';
+      final refreshToken = token.refreshToken ?? '';
+      final expiration = token.expirationDate ?? DateTime(0);
 
       emit(AuthSuccess(
         accessToken: accessToken,
@@ -39,7 +43,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         expiration: expiration,
       ));
     } catch (e) {
-      emit(AuthFailure(e.toString()));
+      // TODO: manage this
+      print(e);
     }
   }
 

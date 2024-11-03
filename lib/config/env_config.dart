@@ -12,6 +12,9 @@ class EnvConfig {
   static late String authorizeUrl;
   static late String tokenUrl;
 
+  static late String uriScheme;
+  static late String redirectUri;
+
   static Future<void> loadEnv() async {
     await dotenv.load(fileName: '.env');
 
@@ -19,6 +22,10 @@ class EnvConfig {
     apiSecret = _getEnvVar('API_SECRET');
     apiBaseUrl = _getEnvVar('API_URL');
     tokenUrl = '${EnvConfig.apiBaseUrl}/oauth/token';
+    authorizeUrl = '${EnvConfig.apiBaseUrl}/oauth/authorize';
+
+    uriScheme = _getEnvVar('URI_SCHEME');
+    redirectUri = '$uriScheme://${_getEnvVar('REDIRECT_URI')}';
   }
 
   static String _getEnvVar(String key) {
