@@ -13,11 +13,11 @@ class EnvConfig {
   static late String tokenUrl;
 
   static Future<void> loadEnv() async {
-    await dotenv.load(fileName: ".env");
+    await dotenv.load(fileName: '.env');
 
-    apiUid = _getEnvVar("API_UID");
-    apiSecret = _getEnvVar("API_SECRET");
-    apiBaseUrl = _getEnvVar("API_URL");
+    apiUid = _getEnvVar('API_UID');
+    apiSecret = _getEnvVar('API_SECRET');
+    apiBaseUrl = _getEnvVar('API_URL');
     tokenUrl = '${EnvConfig.apiBaseUrl}/oauth/token';
   }
 

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: catppuccinTheme(catppuccin.macchiato),
-      home: LoginScreen(title: "Swifty Companion"),
+      home: LoginScreen(title: 'Swifty Companion'),
     );
   }
 }
