@@ -33,7 +33,6 @@ class SecondScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(
               Icons.logout,
-              color: Colors.white,
             ),
             onPressed: () {
               context.read<AuthBloc>().add(LogoutRequested());

@@ -48,5 +48,8 @@ ThemeData catppuccinTheme(Flavor flavor) {
         ),
       ),
     ),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(iconColor: WidgetStateProperty.all(primaryColor)),
+    ),
   );
 }
