@@ -82,6 +82,12 @@ class _AuthWrapperState extends State<AuthWrapper> {
                 (route) => false,
               );
             } else {
+              // TODO: test this
+              if (state is AuthFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              }
               _navigator.pushAndRemoveUntil<void>(
                 LoginScreen.route(),
                 (route) => false,

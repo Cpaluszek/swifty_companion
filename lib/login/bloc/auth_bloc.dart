@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:oauth2_client/oauth2_exception.dart';
 import 'package:swifty_companion/login/bloc/auth_event.dart';
 import 'package:swifty_companion/login/bloc/auth_state.dart';
 import 'package:swifty_companion/config/env_config.dart';
@@ -46,8 +48,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         expiration: expiration,
       ));
     } catch (e) {
-      // TODO: manage this
-      print(e);
+      if (e is DioException) {
+        emit(AuthFailure('Network error: ${e.message}'));
+      } else if (e is OAuth2Exception) {
+        emit(AuthFailure('OAuth error: ${e.error}'));
+      } else {
+        emit(AuthFailure('An unknown error occurred: ${e.toString()}'));
+      }
     }
   }
 
