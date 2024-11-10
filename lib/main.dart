@@ -10,6 +10,7 @@ import 'package:swifty_companion/login/view/login.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swifty_companion/home_screen/home_screen.dart';
 import 'package:swifty_companion/splash_page.dart';
+import 'package:provider/provider.dart';
 
 Future main() async {
   await EnvConfig.loadEnv();
@@ -21,9 +22,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc()..add(InitRequested()),
-      lazy: false,
+    return MultiProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc()..add(InitRequested()),
+          lazy: false,
+        ),
+        RepositoryProvider(create: (context) => DioService(context.read<AuthBloc>())),
+        // Add more providers here as needed (e.g., other services, blocs, etc.)
+      ],
       child: RepositoryProvider(
         create: (context) => DioService(context.read<AuthBloc>()),
         child: const AuthWrapper(),
