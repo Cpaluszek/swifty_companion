@@ -12,8 +12,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<InitRequested>(_onInitRequested);
   }
 
-  Future<void> _onLoginRequested(
-      LoginRequested event, Emitter<AuthState> emit) async {
+  // TODO: token storage between launch
+  // You should persist the authentication token securely (e.g., using flutter_secure_storage) so that users don’t have to log in every time they open the app.
+  // You can load the token in the AuthBloc during initialization and use it in subsequent API calls.
+
+  Future<void> _onLoginRequested(LoginRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
     final client = OAuth2Client(

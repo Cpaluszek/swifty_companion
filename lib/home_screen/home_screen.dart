@@ -6,18 +6,13 @@ import 'package:swifty_companion/login/bloc/auth_bloc.dart';
 import 'package:swifty_companion/login/bloc/auth_event.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen(
-      {super.key,
-      required this.token,
-      required this.expirationDate,
-      required this.refreshToken});
+  const HomeScreen({super.key, required this.token, required this.expirationDate, required this.refreshToken});
 
   final String token;
   final String refreshToken;
   final DateTime expirationDate;
 
-  static Route<void> route(
-      String token, String refreshToken, DateTime expirationDate) {
+  static Route<void> route(String token, String refreshToken, DateTime expirationDate) {
     return MaterialPageRoute<void>(
       builder: (_) => HomeScreen(
         token: token,
@@ -29,6 +24,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dioService = RepositoryProvider.of<DioService>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -57,8 +53,6 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 Logger logger = Logger();
-                DioService dioService = DioService();
-                // TODO: /me does not works
                 var response = dioService.get(endpoint: '/me');
                 logger.i(response.toString());
               },

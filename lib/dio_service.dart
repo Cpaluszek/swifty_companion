@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:swifty_companion/config/env_config.dart';
+import 'package:swifty_companion/login/bloc/auth_bloc.dart';
+import 'package:swifty_companion/login/bloc/auth_state.dart';
 
 final kBaseOptions = BaseOptions(
   connectTimeout: const Duration(seconds: 5),
@@ -10,20 +12,30 @@ final kBaseOptions = BaseOptions(
 
 class DioService {
   final Dio _dio = Dio(kBaseOptions);
+  final AuthBloc _authBloc;
 
   final String _host = '${EnvConfig.apiBaseUrl}/v2';
 
-  DioService() {
+  DioService(this._authBloc) {
     _dio.interceptors.add(PrettyDioLogger(
       requestBody: true,
       requestHeader: true,
     ));
   }
 
-  Future<Response<Map<String, dynamic>>> get<R>(
-      {required String endpoint}) async {
-    // TODO: find a way to manage the token properly
-    final token = '';
+  Future<Response<Map<String, dynamic>>> get<R>({required String endpoint}) async {
+    final state = _authBloc.state; // Get current AuthBloc state
+    final token = state is AuthSuccess ? state.accessToken : null; // Extract token if authenticated
+
+    // TODO: refresh
+    // if (isTokenExpired(state.accessToken)) {
+    //   final newToken = await refreshToken(state.refreshToken);
+    //   emit(AuthSuccess(
+    //     accessToken: newToken.accessToken,
+    //     refreshToken: newToken.refreshToken,
+    //     expiration: newToken.expiration,
+    //   ));
+    // }
     final response = await _dio.get<Map<String, dynamic>>(
       _host + endpoint,
       options: Options(headers: {'Authorization': 'Bearer $token'}),

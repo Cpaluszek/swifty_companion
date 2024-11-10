@@ -2,6 +2,7 @@ import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/config/env_config.dart';
 import 'package:swifty_companion/config/theme.dart';
+import 'package:swifty_companion/dio_service.dart';
 import 'package:swifty_companion/login/bloc/auth_bloc.dart';
 import 'package:swifty_companion/login/bloc/auth_event.dart';
 import 'package:swifty_companion/login/bloc/auth_state.dart';
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc()..add(InitRequested()),
       lazy: false,
-      child: const AuthWrapper(),
+      child: RepositoryProvider(
+        create: (context) => DioService(context.read<AuthBloc>()),
+        child: const AuthWrapper(),
+      ),
     );
   }
 }
@@ -39,6 +43,12 @@ class _AuthWrapperState extends State<AuthWrapper> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
+
+  /* TODO: test this
+  You’re using a NavigatorKey and manually handling navigation in the AuthWrapper.
+  While this works, another approach would be to use the auto_route package or other navigation libraries that simplify complex routing scenarios,
+  especially if you need nested navigation or more complex routes
+   */
 
   @override
   Widget build(BuildContext context) {
