@@ -1,15 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:oauth2_client/oauth2_exception.dart';
 import 'package:swifty_companion/config/env_config.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
-import 'package:swifty_companion/modules/login/bloc/auth_event.dart';
-import 'package:swifty_companion/modules/login/bloc/auth_state.dart';
+
+part 'auth_event.dart';
+part 'auth_state.dart';
+part 'auth_bloc.freezed.dart';
 
 // TODO: use freezed as in user_bloc
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
+  AuthBloc() : super(const AuthInitial()) {
     on<LoginRequested>(_onLoginRequested);
     on<LogoutRequested>(_onLogoutRequested);
     on<InitRequested>(_onInitRequested);
@@ -21,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLoginRequested(
       LoginRequested event, Emitter<AuthState> emit) async {
-    emit(AuthLoading());
+    emit(const AuthLoading());
 
     final client = OAuth2Client(
       authorizeUrl: AppConfig.authorizeUrl,
@@ -61,10 +65,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _onLogoutRequested(LogoutRequested event, Emitter<AuthState> emit) {
-    emit(AuthInitial());
+    emit(const AuthInitial());
   }
 
   void _onInitRequested(InitRequested event, Emitter<AuthState> emit) {
-    emit(AuthInitial());
+    emit(const AuthInitial());
   }
 }

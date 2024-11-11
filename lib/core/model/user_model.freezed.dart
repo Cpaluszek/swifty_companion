@@ -20,9 +20,15 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  String get email => throw _privateConstructorUsedError;
+  String get login => throw _privateConstructorUsedError;
   @JsonKey(name: 'displayname')
   String get displayName => throw _privateConstructorUsedError;
+  String get email =>
+      throw _privateConstructorUsedError; // required String level,
+  String? get location => throw _privateConstructorUsedError;
+  int get wallet => throw _privateConstructorUsedError;
+  @JsonKey(name: 'correction_point')
+  int get evaluationPoints => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +41,13 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
-  $Res call({String email, @JsonKey(name: 'displayname') String displayName});
+  $Res call(
+      {String login,
+      @JsonKey(name: 'displayname') String displayName,
+      String email,
+      String? location,
+      int wallet,
+      @JsonKey(name: 'correction_point') int evaluationPoints});
 }
 
 /// @nodoc
@@ -51,18 +63,38 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? login = null,
     Object? displayName = null,
+    Object? email = null,
+    Object? location = freezed,
+    Object? wallet = null,
+    Object? evaluationPoints = null,
   }) {
     return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      login: null == login
+          ? _value.login
+          : login // ignore: cast_nullable_to_non_nullable
               as String,
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      wallet: null == wallet
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as int,
+      evaluationPoints: null == evaluationPoints
+          ? _value.evaluationPoints
+          : evaluationPoints // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -75,7 +107,13 @@ abstract class _$$UserModelImplCopyWith<$Res>
       __$$UserModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, @JsonKey(name: 'displayname') String displayName});
+  $Res call(
+      {String login,
+      @JsonKey(name: 'displayname') String displayName,
+      String email,
+      String? location,
+      int wallet,
+      @JsonKey(name: 'correction_point') int evaluationPoints});
 }
 
 /// @nodoc
@@ -89,18 +127,38 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? login = null,
     Object? displayName = null,
+    Object? email = null,
+    Object? location = freezed,
+    Object? wallet = null,
+    Object? evaluationPoints = null,
   }) {
     return _then(_$UserModelImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      login: null == login
+          ? _value.login
+          : login // ignore: cast_nullable_to_non_nullable
               as String,
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      wallet: null == wallet
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as int,
+      evaluationPoints: null == evaluationPoints
+          ? _value.evaluationPoints
+          : evaluationPoints // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -110,22 +168,36 @@ class __$$UserModelImplCopyWithImpl<$Res>
 @JsonSerializable(includeIfNull: false)
 class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
   const _$UserModelImpl(
-      {required this.email,
-      @JsonKey(name: 'displayname') required this.displayName})
+      {required this.login,
+      @JsonKey(name: 'displayname') required this.displayName,
+      required this.email,
+      required this.location,
+      required this.wallet,
+      @JsonKey(name: 'correction_point') required this.evaluationPoints})
       : super._();
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
 
   @override
-  final String email;
+  final String login;
   @override
   @JsonKey(name: 'displayname')
   final String displayName;
+  @override
+  final String email;
+// required String level,
+  @override
+  final String? location;
+  @override
+  final int wallet;
+  @override
+  @JsonKey(name: 'correction_point')
+  final int evaluationPoints;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(email: $email, displayName: $displayName)';
+    return 'UserModel(login: $login, displayName: $displayName, email: $email, location: $location, wallet: $wallet, evaluationPoints: $evaluationPoints)';
   }
 
   @override
@@ -133,8 +205,12 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserModel'))
+      ..add(DiagnosticsProperty('login', login))
+      ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('displayName', displayName));
+      ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('wallet', wallet))
+      ..add(DiagnosticsProperty('evaluationPoints', evaluationPoints));
   }
 
   @override
@@ -142,14 +218,21 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserModelImpl &&
-            (identical(other.email, email) || other.email == email) &&
+            (identical(other.login, login) || other.login == login) &&
             (identical(other.displayName, displayName) ||
-                other.displayName == displayName));
+                other.displayName == displayName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.wallet, wallet) || other.wallet == wallet) &&
+            (identical(other.evaluationPoints, evaluationPoints) ||
+                other.evaluationPoints == evaluationPoints));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, email, displayName);
+  int get hashCode => Object.hash(runtimeType, login, displayName, email,
+      location, wallet, evaluationPoints);
 
   @JsonKey(ignore: true)
   @override
@@ -167,19 +250,32 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
 
 abstract class _UserModel extends UserModel {
   const factory _UserModel(
-          {required final String email,
-          @JsonKey(name: 'displayname') required final String displayName}) =
-      _$UserModelImpl;
+      {required final String login,
+      @JsonKey(name: 'displayname') required final String displayName,
+      required final String email,
+      required final String? location,
+      required final int wallet,
+      @JsonKey(name: 'correction_point')
+      required final int evaluationPoints}) = _$UserModelImpl;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
 
   @override
-  String get email;
+  String get login;
   @override
   @JsonKey(name: 'displayname')
   String get displayName;
+  @override
+  String get email;
+  @override // required String level,
+  String? get location;
+  @override
+  int get wallet;
+  @override
+  @JsonKey(name: 'correction_point')
+  int get evaluationPoints;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

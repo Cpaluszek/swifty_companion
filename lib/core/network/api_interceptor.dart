@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
-import 'package:swifty_companion/modules/login/bloc/auth_state.dart';
 
 class ApiInterceptor extends Interceptor {
   ApiInterceptor({

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swifty_companion/core/network/dio_configuration.dart';
 import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
-import 'package:swifty_companion/modules/login/bloc/auth_event.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen(
@@ -69,6 +68,12 @@ class HomeScreen extends StatelessWidget {
                           thickness: 2,
                         ),
                         Text('User Loaded: ${state.user.displayName}'),
+                        Text('login: ${state.user.login}'),
+                        Text('email: ${state.user.email}'),
+                        Text('location: ${state.user.location ?? 'null'}'),
+                        Text('wallet: ${state.user.wallet}'),
+                        Text(
+                            'evaluation points: ${state.user.evaluationPoints}'),
                       ],
                     );
                   } else if (state is UserError) {

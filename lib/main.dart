@@ -6,8 +6,6 @@ import 'package:swifty_companion/core/network/dio_configuration.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swifty_companion/modules/home_screen/home_screen.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
-import 'package:swifty_companion/modules/login/bloc/auth_event.dart';
-import 'package:swifty_companion/modules/login/bloc/auth_state.dart';
 import 'package:swifty_companion/modules/login/view/login.dart';
 import 'package:swifty_companion/modules/splash_page.dart';
 import 'package:provider/provider.dart';

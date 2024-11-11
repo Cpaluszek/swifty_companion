@@ -19,7 +19,7 @@ class UserRepositoryImpl implements UserRepository {
     try {
       return await userClient.getMe();
     } catch (e) {
-      throw Exception('Failed to fetch user data');
+      throw Exception('Failed to fetch user data: ${e.toString()}');
     }
   }
 }
