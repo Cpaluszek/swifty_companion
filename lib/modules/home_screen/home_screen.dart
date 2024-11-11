@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
-import 'package:swifty_companion/dio_service.dart';
-import 'package:swifty_companion/login/bloc/auth_bloc.dart';
-import 'package:swifty_companion/login/bloc/auth_event.dart';
+import 'package:swifty_companion/core/network/dio_configuration.dart';
+import 'package:swifty_companion/core/repository/user_repository.dart';
+import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
+import 'package:swifty_companion/modules/login/bloc/auth_event.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, required this.token, required this.expirationDate, required this.refreshToken});
+  const HomeScreen(
+      {super.key,
+      required this.token,
+      required this.expirationDate,
+      required this.refreshToken});
 
   final String token;
   final String refreshToken;
   final DateTime expirationDate;
 
-  static Route<void> route(String token, String refreshToken, DateTime expirationDate) {
+  static Route<void> route(
+      String token, String refreshToken, DateTime expirationDate) {
     return MaterialPageRoute<void>(
       builder: (_) => HomeScreen(
         token: token,
@@ -24,7 +30,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dioService = RepositoryProvider.of<DioService>(context);
+    final dioService = RepositoryProvider.of<DioConfiguration>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -52,8 +58,10 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
+                UserRepositoryImpl test =
+                    UserRepositoryImpl(dio: dioService.dio);
                 Logger logger = Logger();
-                var response = dioService.get(endpoint: '/me');
+                var response = await test.getMe();
                 logger.i(response.toString());
               },
               child: const Text('Get /users/me'),

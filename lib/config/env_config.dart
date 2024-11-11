@@ -1,19 +1,17 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class EnvConfig {
-  // Prevents from object instantiation
-  EnvConfig._();
+class AppConfig {
+  static late final String apiBaseUrl;
+  static late final String apiUid;
+  static late final String apiSecret;
 
-  static late String apiBaseUrl;
+  static late final String authorizeUrl;
+  static late final String tokenUrl;
 
-  static late String apiUid;
-  static late String apiSecret;
+  static late final String uriScheme;
+  static late final String redirectUri;
 
-  static late String authorizeUrl;
-  static late String tokenUrl;
-
-  static late String uriScheme;
-  static late String redirectUri;
+  static const String me = '/v2/me';
 
   static Future<void> loadEnv() async {
     await dotenv.load(fileName: '.env');
@@ -21,8 +19,8 @@ class EnvConfig {
     apiUid = _getEnvVar('API_UID');
     apiSecret = _getEnvVar('API_SECRET');
     apiBaseUrl = _getEnvVar('API_URL');
-    tokenUrl = '${EnvConfig.apiBaseUrl}/oauth/token';
-    authorizeUrl = '${EnvConfig.apiBaseUrl}/oauth/authorize';
+    tokenUrl = '${AppConfig.apiBaseUrl}/oauth/token';
+    authorizeUrl = '${AppConfig.apiBaseUrl}/oauth/authorize';
 
     uriScheme = _getEnvVar('URI_SCHEME');
     redirectUri = '$uriScheme://${_getEnvVar('REDIRECT_URI')}';

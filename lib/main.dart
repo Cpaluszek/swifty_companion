@@ -2,18 +2,18 @@ import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/config/env_config.dart';
 import 'package:swifty_companion/config/theme.dart';
-import 'package:swifty_companion/dio_service.dart';
-import 'package:swifty_companion/login/bloc/auth_bloc.dart';
-import 'package:swifty_companion/login/bloc/auth_event.dart';
-import 'package:swifty_companion/login/bloc/auth_state.dart';
-import 'package:swifty_companion/login/view/login.dart';
+import 'package:swifty_companion/core/network/dio_configuration.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swifty_companion/home_screen/home_screen.dart';
-import 'package:swifty_companion/splash_page.dart';
+import 'package:swifty_companion/modules/home_screen/home_screen.dart';
+import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
+import 'package:swifty_companion/modules/login/bloc/auth_event.dart';
+import 'package:swifty_companion/modules/login/bloc/auth_state.dart';
+import 'package:swifty_companion/modules/login/view/login.dart';
+import 'package:swifty_companion/modules/splash_page.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
-  await EnvConfig.loadEnv();
+  await AppConfig.loadEnv();
   runApp(const MyApp());
 }
 
@@ -28,13 +28,11 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthBloc()..add(InitRequested()),
           lazy: false,
         ),
-        RepositoryProvider(create: (context) => DioService(context.read<AuthBloc>())),
-        // Add more providers here as needed (e.g., other services, blocs, etc.)
+        RepositoryProvider(
+            create: (context) =>
+                DioConfiguration(authBloc: context.read<AuthBloc>())),
       ],
-      child: RepositoryProvider(
-        create: (context) => DioService(context.read<AuthBloc>()),
-        child: const AuthWrapper(),
-      ),
+      child: const AuthWrapper(),
     );
   }
 }

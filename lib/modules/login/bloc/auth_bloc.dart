@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:oauth2_client/oauth2_exception.dart';
-import 'package:swifty_companion/login/bloc/auth_event.dart';
-import 'package:swifty_companion/login/bloc/auth_state.dart';
 import 'package:swifty_companion/config/env_config.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
+import 'package:swifty_companion/modules/login/bloc/auth_event.dart';
+import 'package:swifty_companion/modules/login/bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
@@ -18,19 +18,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // You should persist the authentication token securely (e.g., using flutter_secure_storage) so that users don’t have to log in every time they open the app.
   // You can load the token in the AuthBloc during initialization and use it in subsequent API calls.
 
-  Future<void> _onLoginRequested(LoginRequested event, Emitter<AuthState> emit) async {
+  Future<void> _onLoginRequested(
+      LoginRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
     final client = OAuth2Client(
-      authorizeUrl: EnvConfig.authorizeUrl,
-      tokenUrl: EnvConfig.tokenUrl,
-      redirectUri: EnvConfig.redirectUri,
-      customUriScheme: EnvConfig.uriScheme,
+      authorizeUrl: AppConfig.authorizeUrl,
+      tokenUrl: AppConfig.tokenUrl,
+      redirectUri: AppConfig.redirectUri,
+      customUriScheme: AppConfig.uriScheme,
     );
     try {
       AccessTokenResponse? token = await client.getTokenWithAuthCodeFlow(
-        clientId: EnvConfig.apiUid,
-        clientSecret: EnvConfig.apiSecret,
+        clientId: AppConfig.apiUid,
+        clientSecret: AppConfig.apiSecret,
         scopes: ['public'],
       );
       // TODO: manage token expiration
