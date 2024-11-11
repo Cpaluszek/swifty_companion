@@ -7,6 +7,7 @@ import 'package:oauth2_client/oauth2_client.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_event.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_state.dart';
 
+// TODO: use freezed as in user_bloc
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<LoginRequested>(_onLoginRequested);
