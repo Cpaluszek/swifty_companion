@@ -20,15 +20,33 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
+  int get id => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_name')
+  String get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_name')
+  String get lastName => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
+  String get kind => throw _privateConstructorUsedError;
   @JsonKey(name: 'displayname')
   String get displayName => throw _privateConstructorUsedError;
-  String get email =>
-      throw _privateConstructorUsedError; // required String level,
   String? get location => throw _privateConstructorUsedError;
   int get wallet => throw _privateConstructorUsedError;
   @JsonKey(name: 'correction_point')
   int get evaluationPoints => throw _privateConstructorUsedError;
+  ImageModel get image => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pool_month')
+  String get poolMonth => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pool_year')
+  String get poolYear => throw _privateConstructorUsedError;
+  @JsonKey(name: 'alumni?')
+  bool get isAlumni => throw _privateConstructorUsedError;
+  @JsonKey(name: 'active?')
+  bool get isActive => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cursus_users')
+  List<CursusUsersModel> get cursusUsers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,12 +60,26 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String login,
-      @JsonKey(name: 'displayname') String displayName,
+      {int id,
       String email,
+      String login,
+      @JsonKey(name: 'first_name') String firstName,
+      @JsonKey(name: 'last_name') String lastName,
+      String url,
+      String phone,
+      String kind,
+      @JsonKey(name: 'displayname') String displayName,
       String? location,
       int wallet,
-      @JsonKey(name: 'correction_point') int evaluationPoints});
+      @JsonKey(name: 'correction_point') int evaluationPoints,
+      ImageModel image,
+      @JsonKey(name: 'pool_month') String poolMonth,
+      @JsonKey(name: 'pool_year') String poolYear,
+      @JsonKey(name: 'alumni?') bool isAlumni,
+      @JsonKey(name: 'active?') bool isActive,
+      @JsonKey(name: 'cursus_users') List<CursusUsersModel> cursusUsers});
+
+  $ImageModelCopyWith<$Res> get image;
 }
 
 /// @nodoc
@@ -63,25 +95,61 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? login = null,
-    Object? displayName = null,
+    Object? id = null,
     Object? email = null,
+    Object? login = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? url = null,
+    Object? phone = null,
+    Object? kind = null,
+    Object? displayName = null,
     Object? location = freezed,
     Object? wallet = null,
     Object? evaluationPoints = null,
+    Object? image = null,
+    Object? poolMonth = null,
+    Object? poolYear = null,
+    Object? isAlumni = null,
+    Object? isActive = null,
+    Object? cursusUsers = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      kind: null == kind
+          ? _value.kind
+          : kind // ignore: cast_nullable_to_non_nullable
+              as String,
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
       location: freezed == location
           ? _value.location
@@ -95,7 +163,39 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.evaluationPoints
           : evaluationPoints // ignore: cast_nullable_to_non_nullable
               as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as ImageModel,
+      poolMonth: null == poolMonth
+          ? _value.poolMonth
+          : poolMonth // ignore: cast_nullable_to_non_nullable
+              as String,
+      poolYear: null == poolYear
+          ? _value.poolYear
+          : poolYear // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAlumni: null == isAlumni
+          ? _value.isAlumni
+          : isAlumni // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      cursusUsers: null == cursusUsers
+          ? _value.cursusUsers
+          : cursusUsers // ignore: cast_nullable_to_non_nullable
+              as List<CursusUsersModel>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImageModelCopyWith<$Res> get image {
+    return $ImageModelCopyWith<$Res>(_value.image, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 }
 
@@ -108,12 +208,27 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String login,
-      @JsonKey(name: 'displayname') String displayName,
+      {int id,
       String email,
+      String login,
+      @JsonKey(name: 'first_name') String firstName,
+      @JsonKey(name: 'last_name') String lastName,
+      String url,
+      String phone,
+      String kind,
+      @JsonKey(name: 'displayname') String displayName,
       String? location,
       int wallet,
-      @JsonKey(name: 'correction_point') int evaluationPoints});
+      @JsonKey(name: 'correction_point') int evaluationPoints,
+      ImageModel image,
+      @JsonKey(name: 'pool_month') String poolMonth,
+      @JsonKey(name: 'pool_year') String poolYear,
+      @JsonKey(name: 'alumni?') bool isAlumni,
+      @JsonKey(name: 'active?') bool isActive,
+      @JsonKey(name: 'cursus_users') List<CursusUsersModel> cursusUsers});
+
+  @override
+  $ImageModelCopyWith<$Res> get image;
 }
 
 /// @nodoc
@@ -127,25 +242,61 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? login = null,
-    Object? displayName = null,
+    Object? id = null,
     Object? email = null,
+    Object? login = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? url = null,
+    Object? phone = null,
+    Object? kind = null,
+    Object? displayName = null,
     Object? location = freezed,
     Object? wallet = null,
     Object? evaluationPoints = null,
+    Object? image = null,
+    Object? poolMonth = null,
+    Object? poolYear = null,
+    Object? isAlumni = null,
+    Object? isActive = null,
+    Object? cursusUsers = null,
   }) {
     return _then(_$UserModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      kind: null == kind
+          ? _value.kind
+          : kind // ignore: cast_nullable_to_non_nullable
+              as String,
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
       location: freezed == location
           ? _value.location
@@ -159,6 +310,30 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.evaluationPoints
           : evaluationPoints // ignore: cast_nullable_to_non_nullable
               as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as ImageModel,
+      poolMonth: null == poolMonth
+          ? _value.poolMonth
+          : poolMonth // ignore: cast_nullable_to_non_nullable
+              as String,
+      poolYear: null == poolYear
+          ? _value.poolYear
+          : poolYear // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAlumni: null == isAlumni
+          ? _value.isAlumni
+          : isAlumni // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      cursusUsers: null == cursusUsers
+          ? _value._cursusUsers
+          : cursusUsers // ignore: cast_nullable_to_non_nullable
+              as List<CursusUsersModel>,
     ));
   }
 }
@@ -168,25 +343,52 @@ class __$$UserModelImplCopyWithImpl<$Res>
 @JsonSerializable(includeIfNull: false)
 class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
   const _$UserModelImpl(
-      {required this.login,
-      @JsonKey(name: 'displayname') required this.displayName,
+      {required this.id,
       required this.email,
+      required this.login,
+      @JsonKey(name: 'first_name') required this.firstName,
+      @JsonKey(name: 'last_name') required this.lastName,
+      required this.url,
+      required this.phone,
+      required this.kind,
+      @JsonKey(name: 'displayname') required this.displayName,
       required this.location,
       required this.wallet,
-      @JsonKey(name: 'correction_point') required this.evaluationPoints})
-      : super._();
+      @JsonKey(name: 'correction_point') required this.evaluationPoints,
+      required this.image,
+      @JsonKey(name: 'pool_month') required this.poolMonth,
+      @JsonKey(name: 'pool_year') required this.poolYear,
+      @JsonKey(name: 'alumni?') required this.isAlumni,
+      @JsonKey(name: 'active?') required this.isActive,
+      @JsonKey(name: 'cursus_users')
+      required final List<CursusUsersModel> cursusUsers})
+      : _cursusUsers = cursusUsers,
+        super._();
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
 
   @override
+  final int id;
+  @override
+  final String email;
+  @override
   final String login;
+  @override
+  @JsonKey(name: 'first_name')
+  final String firstName;
+  @override
+  @JsonKey(name: 'last_name')
+  final String lastName;
+  @override
+  final String url;
+  @override
+  final String phone;
+  @override
+  final String kind;
   @override
   @JsonKey(name: 'displayname')
   final String displayName;
-  @override
-  final String email;
-// required String level,
   @override
   final String? location;
   @override
@@ -194,10 +396,32 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
   @override
   @JsonKey(name: 'correction_point')
   final int evaluationPoints;
+  @override
+  final ImageModel image;
+  @override
+  @JsonKey(name: 'pool_month')
+  final String poolMonth;
+  @override
+  @JsonKey(name: 'pool_year')
+  final String poolYear;
+  @override
+  @JsonKey(name: 'alumni?')
+  final bool isAlumni;
+  @override
+  @JsonKey(name: 'active?')
+  final bool isActive;
+  final List<CursusUsersModel> _cursusUsers;
+  @override
+  @JsonKey(name: 'cursus_users')
+  List<CursusUsersModel> get cursusUsers {
+    if (_cursusUsers is EqualUnmodifiableListView) return _cursusUsers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cursusUsers);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(login: $login, displayName: $displayName, email: $email, location: $location, wallet: $wallet, evaluationPoints: $evaluationPoints)';
+    return 'UserModel(id: $id, email: $email, login: $login, firstName: $firstName, lastName: $lastName, url: $url, phone: $phone, kind: $kind, displayName: $displayName, location: $location, wallet: $wallet, evaluationPoints: $evaluationPoints, image: $image, poolMonth: $poolMonth, poolYear: $poolYear, isAlumni: $isAlumni, isActive: $isActive, cursusUsers: $cursusUsers)';
   }
 
   @override
@@ -205,12 +429,24 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserModel'))
-      ..add(DiagnosticsProperty('login', login))
-      ..add(DiagnosticsProperty('displayName', displayName))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('login', login))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('lastName', lastName))
+      ..add(DiagnosticsProperty('url', url))
+      ..add(DiagnosticsProperty('phone', phone))
+      ..add(DiagnosticsProperty('kind', kind))
+      ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('location', location))
       ..add(DiagnosticsProperty('wallet', wallet))
-      ..add(DiagnosticsProperty('evaluationPoints', evaluationPoints));
+      ..add(DiagnosticsProperty('evaluationPoints', evaluationPoints))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('poolMonth', poolMonth))
+      ..add(DiagnosticsProperty('poolYear', poolYear))
+      ..add(DiagnosticsProperty('isAlumni', isAlumni))
+      ..add(DiagnosticsProperty('isActive', isActive))
+      ..add(DiagnosticsProperty('cursusUsers', cursusUsers));
   }
 
   @override
@@ -218,21 +454,58 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.login, login) || other.login == login) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.kind, kind) || other.kind == kind) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
-            (identical(other.email, email) || other.email == email) &&
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.wallet, wallet) || other.wallet == wallet) &&
             (identical(other.evaluationPoints, evaluationPoints) ||
-                other.evaluationPoints == evaluationPoints));
+                other.evaluationPoints == evaluationPoints) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.poolMonth, poolMonth) ||
+                other.poolMonth == poolMonth) &&
+            (identical(other.poolYear, poolYear) ||
+                other.poolYear == poolYear) &&
+            (identical(other.isAlumni, isAlumni) ||
+                other.isAlumni == isAlumni) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
+            const DeepCollectionEquality()
+                .equals(other._cursusUsers, _cursusUsers));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, login, displayName, email,
-      location, wallet, evaluationPoints);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      email,
+      login,
+      firstName,
+      lastName,
+      url,
+      phone,
+      kind,
+      displayName,
+      location,
+      wallet,
+      evaluationPoints,
+      image,
+      poolMonth,
+      poolYear,
+      isAlumni,
+      isActive,
+      const DeepCollectionEquality().hash(_cursusUsers));
 
   @JsonKey(ignore: true)
   @override
@@ -250,32 +523,75 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
 
 abstract class _UserModel extends UserModel {
   const factory _UserModel(
-      {required final String login,
-      @JsonKey(name: 'displayname') required final String displayName,
+      {required final int id,
       required final String email,
+      required final String login,
+      @JsonKey(name: 'first_name') required final String firstName,
+      @JsonKey(name: 'last_name') required final String lastName,
+      required final String url,
+      required final String phone,
+      required final String kind,
+      @JsonKey(name: 'displayname') required final String displayName,
       required final String? location,
       required final int wallet,
-      @JsonKey(name: 'correction_point')
-      required final int evaluationPoints}) = _$UserModelImpl;
+      @JsonKey(name: 'correction_point') required final int evaluationPoints,
+      required final ImageModel image,
+      @JsonKey(name: 'pool_month') required final String poolMonth,
+      @JsonKey(name: 'pool_year') required final String poolYear,
+      @JsonKey(name: 'alumni?') required final bool isAlumni,
+      @JsonKey(name: 'active?') required final bool isActive,
+      @JsonKey(name: 'cursus_users')
+      required final List<CursusUsersModel> cursusUsers}) = _$UserModelImpl;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
 
   @override
+  int get id;
+  @override
+  String get email;
+  @override
   String get login;
+  @override
+  @JsonKey(name: 'first_name')
+  String get firstName;
+  @override
+  @JsonKey(name: 'last_name')
+  String get lastName;
+  @override
+  String get url;
+  @override
+  String get phone;
+  @override
+  String get kind;
   @override
   @JsonKey(name: 'displayname')
   String get displayName;
   @override
-  String get email;
-  @override // required String level,
   String? get location;
   @override
   int get wallet;
   @override
   @JsonKey(name: 'correction_point')
   int get evaluationPoints;
+  @override
+  ImageModel get image;
+  @override
+  @JsonKey(name: 'pool_month')
+  String get poolMonth;
+  @override
+  @JsonKey(name: 'pool_year')
+  String get poolYear;
+  @override
+  @JsonKey(name: 'alumni?')
+  bool get isAlumni;
+  @override
+  @JsonKey(name: 'active?')
+  bool get isActive;
+  @override
+  @JsonKey(name: 'cursus_users')
+  List<CursusUsersModel> get cursusUsers;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
