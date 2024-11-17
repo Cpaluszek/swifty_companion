@@ -15,7 +15,7 @@ _$AchievementModelImpl _$$AchievementModelImplFromJson(
       tier: json['tier'] as String,
       image: json['image'] as String,
       nbrOfSuccess: (json['nbr_of_success'] as num?)?.toInt(),
-      isVisible: json['isVisible'] as bool,
+      visible: json['visible'] as bool,
     );
 
 Map<String, dynamic> _$$AchievementModelImplToJson(
@@ -35,6 +35,6 @@ Map<String, dynamic> _$$AchievementModelImplToJson(
   }
 
   writeNotNull('nbr_of_success', instance.nbrOfSuccess);
-  val['isVisible'] = instance.isVisible;
+  val['visible'] = instance.visible;
   return val;
 }

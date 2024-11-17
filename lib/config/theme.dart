@@ -8,8 +8,7 @@ ThemeData catppuccinTheme(Flavor flavor) {
     useMaterial3: true,
     appBarTheme: AppBarTheme(
         elevation: 0,
-        titleTextStyle: TextStyle(
-            color: flavor.text, fontSize: 20, fontWeight: FontWeight.bold),
+        titleTextStyle: TextStyle(color: flavor.text, fontSize: 20, fontWeight: FontWeight.bold),
         backgroundColor: flavor.crust,
         foregroundColor: flavor.mantle),
     colorScheme: ColorScheme(
@@ -50,6 +49,11 @@ ThemeData catppuccinTheme(Flavor flavor) {
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(iconColor: WidgetStateProperty.all(primaryColor)),
+    ),
+    cardTheme: CardTheme(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      color: flavor.crust,
     ),
   );
 }

@@ -25,8 +25,14 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       poolYear: json['pool_year'] as String,
       isAlumni: json['alumni?'] as bool,
       isActive: json['active?'] as bool,
+      campus: (json['campus'] as List<dynamic>)
+          .map((e) => CampusModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       cursusUsers: (json['cursus_users'] as List<dynamic>)
           .map((e) => CursusUsersModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      achievements: (json['achievements'] as List<dynamic>)
+          .map((e) => AchievementModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -57,6 +63,8 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) {
   val['pool_year'] = instance.poolYear;
   val['alumni?'] = instance.isAlumni;
   val['active?'] = instance.isActive;
+  val['campus'] = instance.campus;
   val['cursus_users'] = instance.cursusUsers;
+  val['achievements'] = instance.achievements;
   return val;
 }

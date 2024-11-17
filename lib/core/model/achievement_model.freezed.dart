@@ -25,9 +25,9 @@ mixin _$AchievementModel {
   String get description => throw _privateConstructorUsedError;
   String get tier => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  @JsonKey(name: "nbr_of_success")
+  @JsonKey(name: 'nbr_of_success')
   int? get nbrOfSuccess => throw _privateConstructorUsedError;
-  bool get isVisible => throw _privateConstructorUsedError;
+  bool get visible => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,8 +47,8 @@ abstract class $AchievementModelCopyWith<$Res> {
       String description,
       String tier,
       String image,
-      @JsonKey(name: "nbr_of_success") int? nbrOfSuccess,
-      bool isVisible});
+      @JsonKey(name: 'nbr_of_success') int? nbrOfSuccess,
+      bool visible});
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ class _$AchievementModelCopyWithImpl<$Res, $Val extends AchievementModel>
     Object? tier = null,
     Object? image = null,
     Object? nbrOfSuccess = freezed,
-    Object? isVisible = null,
+    Object? visible = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,9 +97,9 @@ class _$AchievementModelCopyWithImpl<$Res, $Val extends AchievementModel>
           ? _value.nbrOfSuccess
           : nbrOfSuccess // ignore: cast_nullable_to_non_nullable
               as int?,
-      isVisible: null == isVisible
-          ? _value.isVisible
-          : isVisible // ignore: cast_nullable_to_non_nullable
+      visible: null == visible
+          ? _value.visible
+          : visible // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -119,8 +119,8 @@ abstract class _$$AchievementModelImplCopyWith<$Res>
       String description,
       String tier,
       String image,
-      @JsonKey(name: "nbr_of_success") int? nbrOfSuccess,
-      bool isVisible});
+      @JsonKey(name: 'nbr_of_success') int? nbrOfSuccess,
+      bool visible});
 }
 
 /// @nodoc
@@ -140,7 +140,7 @@ class __$$AchievementModelImplCopyWithImpl<$Res>
     Object? tier = null,
     Object? image = null,
     Object? nbrOfSuccess = freezed,
-    Object? isVisible = null,
+    Object? visible = null,
   }) {
     return _then(_$AchievementModelImpl(
       id: null == id
@@ -167,9 +167,9 @@ class __$$AchievementModelImplCopyWithImpl<$Res>
           ? _value.nbrOfSuccess
           : nbrOfSuccess // ignore: cast_nullable_to_non_nullable
               as int?,
-      isVisible: null == isVisible
-          ? _value.isVisible
-          : isVisible // ignore: cast_nullable_to_non_nullable
+      visible: null == visible
+          ? _value.visible
+          : visible // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -186,8 +186,8 @@ class _$AchievementModelImpl extends _AchievementModel
       required this.description,
       required this.tier,
       required this.image,
-      @JsonKey(name: "nbr_of_success") required this.nbrOfSuccess,
-      required this.isVisible})
+      @JsonKey(name: 'nbr_of_success') required this.nbrOfSuccess,
+      required this.visible})
       : super._();
 
   factory _$AchievementModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -204,14 +204,14 @@ class _$AchievementModelImpl extends _AchievementModel
   @override
   final String image;
   @override
-  @JsonKey(name: "nbr_of_success")
+  @JsonKey(name: 'nbr_of_success')
   final int? nbrOfSuccess;
   @override
-  final bool isVisible;
+  final bool visible;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AchievementModel(id: $id, name: $name, description: $description, tier: $tier, image: $image, nbrOfSuccess: $nbrOfSuccess, isVisible: $isVisible)';
+    return 'AchievementModel(id: $id, name: $name, description: $description, tier: $tier, image: $image, nbrOfSuccess: $nbrOfSuccess, visible: $visible)';
   }
 
   @override
@@ -225,7 +225,7 @@ class _$AchievementModelImpl extends _AchievementModel
       ..add(DiagnosticsProperty('tier', tier))
       ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('nbrOfSuccess', nbrOfSuccess))
-      ..add(DiagnosticsProperty('isVisible', isVisible));
+      ..add(DiagnosticsProperty('visible', visible));
   }
 
   @override
@@ -241,14 +241,13 @@ class _$AchievementModelImpl extends _AchievementModel
             (identical(other.image, image) || other.image == image) &&
             (identical(other.nbrOfSuccess, nbrOfSuccess) ||
                 other.nbrOfSuccess == nbrOfSuccess) &&
-            (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
+            (identical(other.visible, visible) || other.visible == visible));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, description, tier, image, nbrOfSuccess, isVisible);
+      runtimeType, id, name, description, tier, image, nbrOfSuccess, visible);
 
   @JsonKey(ignore: true)
   @override
@@ -272,8 +271,8 @@ abstract class _AchievementModel extends AchievementModel {
       required final String description,
       required final String tier,
       required final String image,
-      @JsonKey(name: "nbr_of_success") required final int? nbrOfSuccess,
-      required final bool isVisible}) = _$AchievementModelImpl;
+      @JsonKey(name: 'nbr_of_success') required final int? nbrOfSuccess,
+      required final bool visible}) = _$AchievementModelImpl;
   const _AchievementModel._() : super._();
 
   factory _AchievementModel.fromJson(Map<String, dynamic> json) =
@@ -290,10 +289,10 @@ abstract class _AchievementModel extends AchievementModel {
   @override
   String get image;
   @override
-  @JsonKey(name: "nbr_of_success")
+  @JsonKey(name: 'nbr_of_success')
   int? get nbrOfSuccess;
   @override
-  bool get isVisible;
+  bool get visible;
   @override
   @JsonKey(ignore: true)
   _$$AchievementModelImplCopyWith<_$AchievementModelImpl> get copyWith =>

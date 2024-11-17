@@ -13,7 +13,7 @@ _$CursusUsersModelImpl _$$CursusUsersModelImplFromJson(
       cursusId: (json['cursus_id'] as num).toInt(),
       grade: json['grade'] as String?,
       level: (json['level'] as num).toDouble(),
-      skill: (json['skill'] as List<dynamic>)
+      skills: (json['skills'] as List<dynamic>)
           .map((e) => SkillModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       cursus: CursusModel.fromJson(json['cursus'] as Map<String, dynamic>),
@@ -34,7 +34,7 @@ Map<String, dynamic> _$$CursusUsersModelImplToJson(
 
   writeNotNull('grade', instance.grade);
   val['level'] = instance.level;
-  val['skill'] = instance.skill;
+  val['skills'] = instance.skills;
   val['cursus'] = instance.cursus;
   return val;
 }

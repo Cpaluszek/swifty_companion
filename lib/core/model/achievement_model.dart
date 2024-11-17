@@ -15,10 +15,9 @@ class AchievementModel with _$AchievementModel {
     required String description,
     required String tier,
     required String image,
-    @JsonKey(name: "nbr_of_success") required int? nbrOfSuccess,
-    required bool isVisible,
+    @JsonKey(name: 'nbr_of_success') required int? nbrOfSuccess,
+    required bool visible,
   }) = _AchievementModel;
 
-  factory AchievementModel.fromJson(Map<String, Object?> json) =>
-      _$AchievementModelFromJson(json);
+  factory AchievementModel.fromJson(Map<String, Object?> json) => _$AchievementModelFromJson(json);
 }

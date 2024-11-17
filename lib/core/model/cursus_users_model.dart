@@ -15,12 +15,11 @@ class CursusUsersModel with _$CursusUsersModel {
     @JsonKey(name: 'cursus_id') required int cursusId,
     required String? grade,
     required double level,
-    required List<SkillModel> skill,
+    required List<SkillModel> skills,
     required CursusModel cursus,
   }) = _CursusUsersModel;
 
-  factory CursusUsersModel.fromJson(Map<String, Object?> json) =>
-      _$CursusUsersModelFromJson(json);
+  factory CursusUsersModel.fromJson(Map<String, Object?> json) => _$CursusUsersModelFromJson(json);
 }
 
 @freezed
@@ -35,6 +34,5 @@ class CursusModel with _$CursusModel {
     required String kind,
   }) = _CursusModel;
 
-  factory CursusModel.fromJson(Map<String, Object?> json) =>
-      _$CursusModelFromJson(json);
+  factory CursusModel.fromJson(Map<String, Object?> json) => _$CursusModelFromJson(json);
 }

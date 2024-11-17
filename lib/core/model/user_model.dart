@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:swifty_companion/core/model/achievement_model.dart';
+import 'package:swifty_companion/core/model/campus_model.dart';
 import 'package:swifty_companion/core/model/cursus_users_model.dart';
 import 'package:swifty_companion/core/model/image_model.dart';
 
@@ -29,11 +31,12 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'pool_year') required String poolYear,
     @JsonKey(name: 'alumni?') required bool isAlumni,
     @JsonKey(name: 'active?') required bool isActive,
+    required List<CampusModel> campus,
     @JsonKey(name: 'cursus_users') required List<CursusUsersModel> cursusUsers,
+    required List<AchievementModel> achievements,
   }) = _UserModel;
 
-  factory UserModel.fromJson(Map<String, Object?> json) =>
-      _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, Object?> json) => _$UserModelFromJson(json);
 }
 
 /*

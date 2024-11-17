@@ -12,9 +12,8 @@ class SkillModel with _$SkillModel {
   const factory SkillModel({
     required int id,
     required String name,
-    required String level,
+    required double level,
   }) = _SkillModel;
 
-  factory SkillModel.fromJson(Map<String, Object?> json) =>
-      _$SkillModelFromJson(json);
+  factory SkillModel.fromJson(Map<String, Object?> json) => _$SkillModelFromJson(json);
 }

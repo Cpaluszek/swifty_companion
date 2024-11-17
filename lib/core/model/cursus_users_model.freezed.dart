@@ -25,7 +25,7 @@ mixin _$CursusUsersModel {
   int get cursusId => throw _privateConstructorUsedError;
   String? get grade => throw _privateConstructorUsedError;
   double get level => throw _privateConstructorUsedError;
-  List<SkillModel> get skill => throw _privateConstructorUsedError;
+  List<SkillModel> get skills => throw _privateConstructorUsedError;
   CursusModel get cursus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $CursusUsersModelCopyWith<$Res> {
       @JsonKey(name: 'cursus_id') int cursusId,
       String? grade,
       double level,
-      List<SkillModel> skill,
+      List<SkillModel> skills,
       CursusModel cursus});
 
   $CursusModelCopyWith<$Res> get cursus;
@@ -68,7 +68,7 @@ class _$CursusUsersModelCopyWithImpl<$Res, $Val extends CursusUsersModel>
     Object? cursusId = null,
     Object? grade = freezed,
     Object? level = null,
-    Object? skill = null,
+    Object? skills = null,
     Object? cursus = null,
   }) {
     return _then(_value.copyWith(
@@ -88,9 +88,9 @@ class _$CursusUsersModelCopyWithImpl<$Res, $Val extends CursusUsersModel>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as double,
-      skill: null == skill
-          ? _value.skill
-          : skill // ignore: cast_nullable_to_non_nullable
+      skills: null == skills
+          ? _value.skills
+          : skills // ignore: cast_nullable_to_non_nullable
               as List<SkillModel>,
       cursus: null == cursus
           ? _value.cursus
@@ -121,7 +121,7 @@ abstract class _$$CursusUsersModelImplCopyWith<$Res>
       @JsonKey(name: 'cursus_id') int cursusId,
       String? grade,
       double level,
-      List<SkillModel> skill,
+      List<SkillModel> skills,
       CursusModel cursus});
 
   @override
@@ -143,7 +143,7 @@ class __$$CursusUsersModelImplCopyWithImpl<$Res>
     Object? cursusId = null,
     Object? grade = freezed,
     Object? level = null,
-    Object? skill = null,
+    Object? skills = null,
     Object? cursus = null,
   }) {
     return _then(_$CursusUsersModelImpl(
@@ -163,9 +163,9 @@ class __$$CursusUsersModelImplCopyWithImpl<$Res>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as double,
-      skill: null == skill
-          ? _value._skill
-          : skill // ignore: cast_nullable_to_non_nullable
+      skills: null == skills
+          ? _value._skills
+          : skills // ignore: cast_nullable_to_non_nullable
               as List<SkillModel>,
       cursus: null == cursus
           ? _value.cursus
@@ -185,9 +185,9 @@ class _$CursusUsersModelImpl extends _CursusUsersModel
       @JsonKey(name: 'cursus_id') required this.cursusId,
       required this.grade,
       required this.level,
-      required final List<SkillModel> skill,
+      required final List<SkillModel> skills,
       required this.cursus})
-      : _skill = skill,
+      : _skills = skills,
         super._();
 
   factory _$CursusUsersModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -202,12 +202,12 @@ class _$CursusUsersModelImpl extends _CursusUsersModel
   final String? grade;
   @override
   final double level;
-  final List<SkillModel> _skill;
+  final List<SkillModel> _skills;
   @override
-  List<SkillModel> get skill {
-    if (_skill is EqualUnmodifiableListView) return _skill;
+  List<SkillModel> get skills {
+    if (_skills is EqualUnmodifiableListView) return _skills;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_skill);
+    return EqualUnmodifiableListView(_skills);
   }
 
   @override
@@ -215,7 +215,7 @@ class _$CursusUsersModelImpl extends _CursusUsersModel
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CursusUsersModel(id: $id, cursusId: $cursusId, grade: $grade, level: $level, skill: $skill, cursus: $cursus)';
+    return 'CursusUsersModel(id: $id, cursusId: $cursusId, grade: $grade, level: $level, skills: $skills, cursus: $cursus)';
   }
 
   @override
@@ -227,7 +227,7 @@ class _$CursusUsersModelImpl extends _CursusUsersModel
       ..add(DiagnosticsProperty('cursusId', cursusId))
       ..add(DiagnosticsProperty('grade', grade))
       ..add(DiagnosticsProperty('level', level))
-      ..add(DiagnosticsProperty('skill', skill))
+      ..add(DiagnosticsProperty('skills', skills))
       ..add(DiagnosticsProperty('cursus', cursus));
   }
 
@@ -241,14 +241,14 @@ class _$CursusUsersModelImpl extends _CursusUsersModel
                 other.cursusId == cursusId) &&
             (identical(other.grade, grade) || other.grade == grade) &&
             (identical(other.level, level) || other.level == level) &&
-            const DeepCollectionEquality().equals(other._skill, _skill) &&
+            const DeepCollectionEquality().equals(other._skills, _skills) &&
             (identical(other.cursus, cursus) || other.cursus == cursus));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, cursusId, grade, level,
-      const DeepCollectionEquality().hash(_skill), cursus);
+      const DeepCollectionEquality().hash(_skills), cursus);
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +271,7 @@ abstract class _CursusUsersModel extends CursusUsersModel {
       @JsonKey(name: 'cursus_id') required final int cursusId,
       required final String? grade,
       required final double level,
-      required final List<SkillModel> skill,
+      required final List<SkillModel> skills,
       required final CursusModel cursus}) = _$CursusUsersModelImpl;
   const _CursusUsersModel._() : super._();
 
@@ -288,7 +288,7 @@ abstract class _CursusUsersModel extends CursusUsersModel {
   @override
   double get level;
   @override
-  List<SkillModel> get skill;
+  List<SkillModel> get skills;
   @override
   CursusModel get cursus;
   @override
