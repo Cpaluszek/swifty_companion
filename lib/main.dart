@@ -65,11 +65,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
           listener: (context, state) {
             if (state is AuthSuccess) {
               _navigator.pushAndRemoveUntil<void>(
-                HomeScreen.route(
-                  state.accessToken,
-                  state.refreshToken,
-                  state.expiration,
-                ),
+                HomeScreen.route(),
                 (route) => false,
               );
             } else if (state is AuthLoading) {

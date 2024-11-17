@@ -103,12 +103,18 @@ class __$$UserInitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserInitialImpl implements UserInitial {
+class _$UserInitialImpl with DiagnosticableTreeMixin implements UserInitial {
   const _$UserInitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.initial'));
   }
 
   @override
@@ -217,12 +223,18 @@ class __$$UserLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserLoadingImpl implements UserLoading {
+class _$UserLoadingImpl with DiagnosticableTreeMixin implements UserLoading {
   const _$UserLoadingImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.loading'));
   }
 
   @override
@@ -356,15 +368,23 @@ class __$$UserLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserLoadedImpl implements UserLoaded {
+class _$UserLoadedImpl with DiagnosticableTreeMixin implements UserLoaded {
   const _$UserLoadedImpl(this.user);
 
   @override
   final UserModel user;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.loaded(user: $user)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserState.loaded'))
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
@@ -501,15 +521,23 @@ class __$$UserErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserErrorImpl implements UserError {
+class _$UserErrorImpl with DiagnosticableTreeMixin implements UserError {
   const _$UserErrorImpl(this.error);
 
   @override
   final String error;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.error(error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserState.error'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
