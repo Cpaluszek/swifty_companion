@@ -1,5 +1,7 @@
+import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:swifty_companion/core/model/user_model.dart';
 import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
 
@@ -31,6 +33,7 @@ class UserDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final flavor = Provider.of<Flavor>(context);
     final user = userState.user;
 
     // TODO: Chip(label: Text(user.kind)),
@@ -43,6 +46,7 @@ class UserDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Chip(
+              backgroundColor: flavor.mantle,
               label: Text(
                 'Campus: ${user.campus.isNotEmpty ? user.campus.first.name : 'N/A'}',
                 style: const TextStyle(fontSize: 18),
@@ -50,6 +54,7 @@ class UserDetails extends StatelessWidget {
             ),
             const SizedBox(width: 24),
             Chip(
+              backgroundColor: flavor.mantle,
               label: Text(
                 'Location: ${user.location ?? 'N/A'}',
                 style: const TextStyle(fontSize: 18),
@@ -133,10 +138,11 @@ class CursusInformation extends StatelessWidget {
       return const Text('No Cursus Data Available', style: TextStyle(fontSize: 18));
     }
 
+    final flavor = Provider.of<Flavor>(context);
     final lastCursus = user.cursusUsers.last;
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -144,32 +150,95 @@ class CursusInformation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Cursus: ${lastCursus.cursus.name}',
-                  style: const TextStyle(fontSize: 18),
+                  lastCursus.cursus.name,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                const SizedBox(width: 24),
+                const SizedBox(width: 64),
                 Text(
-                  'Grade: ${lastCursus.grade ?? 'N/A'}',
-                  style: const TextStyle(fontSize: 18),
+                  lastCursus.grade ?? 'N/A',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            Text(
-              'Level: ${lastCursus.level}',
-              style: const TextStyle(fontSize: 18),
+
+            // Level Progress
+            Stack(
+              alignment: Alignment.center, // Center the text
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: LinearProgressIndicator(
+                    value: lastCursus.level - lastCursus.level.truncateToDouble(),
+                    color: flavor.lavender,
+                    backgroundColor: flavor.lavender.withOpacity(.2),
+                    minHeight: 20,
+                  ),
+                ),
+                Text(
+                  'Level ${lastCursus.level.toStringAsFixed(2)}',
+                  style: TextStyle(
+                    color: flavor.surface1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              'Pool: ${user.poolMonth} ${user.poolYear}',
-              style: const TextStyle(fontSize: 18),
+            const SizedBox(height: 16),
+
+            // Information Section
+            Row(
+              children: [
+                Icon(Icons.assessment_outlined, color: flavor.mauve),
+                const SizedBox(width: 8),
+                const Text(
+                  'Evaluation Points:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                Text(
+                  '${user.evaluationPoints}',
+                  style: TextStyle(fontSize: 16, color: flavor.mauve),
+                ),
+              ],
             ),
-            Text(
-              'Correction Points: ${user.evaluationPoints}',
-              style: const TextStyle(fontSize: 18),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.account_balance_wallet_outlined, color: flavor.mauve),
+                const SizedBox(width: 8),
+                const Text(
+                  'Wallet Balance:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                Text(
+                  '\$${user.wallet}',
+                  style: TextStyle(fontSize: 16, color: flavor.mauve),
+                ),
+              ],
             ),
-            Text(
-              'Wallet Balance: \$${user.wallet}',
-              style: const TextStyle(fontSize: 18),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.pool_outlined, color: flavor.mauve),
+                const SizedBox(width: 8),
+                const Text(
+                  'Pool:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                Text(
+                  '${user.poolMonth} ${user.poolYear}',
+                  style: TextStyle(fontSize: 16, color: flavor.mauve),
+                ),
+              ],
             ),
           ],
         ),

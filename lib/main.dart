@@ -22,13 +22,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<Flavor>.value(
+          value: catppuccin.mocha,
+        ),
         BlocProvider(
           create: (context) => AuthBloc()..add(InitRequested()),
           lazy: false,
         ),
-        RepositoryProvider(
-            create: (context) =>
-                DioConfiguration(authBloc: context.read<AuthBloc>())),
+        RepositoryProvider(create: (context) => DioConfiguration(authBloc: context.read<AuthBloc>())),
       ],
       child: const AuthWrapper(),
     );
