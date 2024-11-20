@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:swifty_companion/core/model/user_model.dart';
 import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
+import 'package:swifty_companion/modules/home_screen/widget/achievements_widget.dart';
 
 class UserInfoWidget extends StatelessWidget {
   const UserInfoWidget({super.key});
@@ -73,6 +74,7 @@ class UserDetails extends StatelessWidget {
           flavor: flavor,
         ),
         const SizedBox(height: 8),
+        AchievementsWidget(achievements: user.achievements),
         _buildCard(
           title: 'Skills',
           icon: Icons.lightbulb_outline,
