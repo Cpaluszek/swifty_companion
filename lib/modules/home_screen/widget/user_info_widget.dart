@@ -41,7 +41,7 @@ class UserDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         UserProfileHeader(user: user),
-        const SizedBox(height: 16),
+        const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,42 +49,73 @@ class UserDetails extends StatelessWidget {
               backgroundColor: flavor.mantle,
               label: Text(
                 'Campus: ${user.campus.isNotEmpty ? user.campus.first.name : 'N/A'}',
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 16),
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
             ),
             const SizedBox(width: 24),
             Chip(
               backgroundColor: flavor.mantle,
               label: Text(
                 'Location: ${user.location ?? 'N/A'}',
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 16),
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
             )
           ],
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 12),
         CursusInformation(user: user),
-        const SizedBox(height: 4),
-        const Card(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Text(
-              'TODO Achievements',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
+        const SizedBox(height: 16),
+        _buildCard(
+          title: 'Achievements',
+          icon: Icons.star_border,
+          flavor: flavor,
         ),
-        const SizedBox(height: 4),
-        const Card(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Text(
-              'TODO Skills',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
+        const SizedBox(height: 8),
+        _buildCard(
+          title: 'Skills',
+          icon: Icons.lightbulb_outline,
+          flavor: flavor,
         ),
       ],
+    );
+  }
+
+  Widget _buildCard({
+    required String title,
+    required IconData icon,
+    required Flavor flavor,
+  }) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 28,
+              color: flavor.mauve,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: flavor.text,
+              ),
+            ),
+            const Spacer(),
+            Icon(
+              Icons.keyboard_arrow_down,
+              color: flavor.mauve.withOpacity(0.7),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -104,13 +135,16 @@ class UserProfileHeader extends StatelessWidget {
             backgroundImage: NetworkImage(user.image.versions.small),
             radius: 50,
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 user.displayName,
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 user.login,
@@ -191,8 +225,6 @@ class CursusInformation extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-
-            // Information Section
             Row(
               children: [
                 Icon(Icons.assessment_outlined, color: flavor.mauve),
