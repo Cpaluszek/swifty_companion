@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:swifty_companion/core/model/achievement_model.dart';
 import 'package:swifty_companion/core/model/campus_model.dart';
 import 'package:swifty_companion/core/model/cursus_users_model.dart';
 import 'package:swifty_companion/core/model/image_model.dart';
+import 'package:swifty_companion/core/model/skill_model.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
@@ -37,18 +40,21 @@ class UserModel with _$UserModel {
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) => _$UserModelFromJson(json);
-}
 
-/*
-"id": 132111,
-I/flutter ( 4795): ║         "email": "cpalusze@student.42lyon.fr",
-I/flutter ( 4795): ║         "login": "cpalusze",
-I/flutter ( 4795): ║         "first_name": "Clément",
-I/flutter ( 4795): ║         "last_name": "Paluszek",
-I/flutter ( 4795): ║         "usual_full_name": "Clément Paluszek",
-I/flutter ( 4795): ║         "usual_first_name": null,
-I/flutter ( 4795): ║         "url": "https://api.intra.42.fr/v2/users/cpalusze",
-I/flutter ( 4795): ║         "phone": "hidden",
-I/flutter ( 4795): ║         "displayname": "Clément Paluszek",
-I/flutter ( 4795): ║         "kind": "student",
- */
+  List<SkillModel> getAllSkills() {
+    final Map<String, SkillModel> skillMap = {};
+
+    for (final cursusUser in cursusUsers) {
+      for (final skill in cursusUser.skills) {
+        if (skillMap.containsKey(skill.name)) {
+          // Combine duplicate skills
+          final existingSkill = skillMap[skill.name]!;
+          skillMap[skill.name] = skill.copyWith(level: max(skill.level, existingSkill.level));
+        } else {
+          skillMap[skill.name] = skill;
+        }
+      }
+    }
+    return skillMap.values.toList();
+  }
+}
