@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:swifty_companion/core/model/user_model.dart';
 import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
 import 'package:swifty_companion/modules/home_screen/widget/achievements_modal_bottom_sheet.dart';
+import 'package:swifty_companion/modules/home_screen/widget/skills_modal_bottom_sheet.dart';
 
 class UserInfoWidget extends StatelessWidget {
   const UserInfoWidget({super.key});
@@ -52,10 +53,10 @@ class UserDetails extends StatelessWidget {
           modal: AchievementsModalBottomSheet(achievements: user.achievements),
         ),
         const SizedBox(height: 12),
-        const ModalButton(
+        ModalButton(
           title: 'Skills',
           icon: Icons.lightbulb_outline,
-          modal: Center(child: Text('Skills placeholder')),
+          modal: SkillsModalBottomSheet(skills: user.getAllSkills()),
         ),
       ],
     );
