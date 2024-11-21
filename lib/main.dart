@@ -1,5 +1,6 @@
 import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:swifty_companion/config/env_config.dart';
 import 'package:swifty_companion/config/theme.dart';
 import 'package:swifty_companion/core/network/dio_configuration.dart';
@@ -11,6 +12,11 @@ import 'package:swifty_companion/modules/splash_page.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
   await AppConfig.loadEnv();
   runApp(const MyApp());
 }
