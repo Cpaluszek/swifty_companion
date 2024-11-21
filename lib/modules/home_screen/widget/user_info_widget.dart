@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:swifty_companion/core/model/user_model.dart';
 import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
-import 'package:swifty_companion/modules/home_screen/widget/achievements_modal_bottom_sheet.dart';
-import 'package:swifty_companion/modules/home_screen/widget/skills_modal_bottom_sheet.dart';
+import 'package:swifty_companion/modules/home_screen/widget/achievements_bottom_sheet.dart';
+import 'package:swifty_companion/modules/home_screen/widget/skills_bottom_sheet.dart';
 
 class UserInfoWidget extends StatelessWidget {
   const UserInfoWidget({super.key});
@@ -50,13 +50,19 @@ class UserDetails extends StatelessWidget {
         ModalButton(
           title: 'Achievements',
           icon: Icons.star_border,
-          modal: AchievementsModalBottomSheet(achievements: user.achievements),
+          modal: AchievementsBottomSheet(achievements: user.achievements),
         ),
         const SizedBox(height: 12),
         ModalButton(
           title: 'Skills',
           icon: Icons.lightbulb_outline,
-          modal: SkillsModalBottomSheet(skills: user.getAllSkills()),
+          modal: SkillsBottomSheet(skills: user.getAllSkills()),
+        ),
+        const SizedBox(height: 12),
+        ModalButton(
+          title: 'Projects',
+          icon: Icons.cases_outlined,
+          modal: SkillsBottomSheet(skills: user.getAllSkills()),
         ),
       ],
     );

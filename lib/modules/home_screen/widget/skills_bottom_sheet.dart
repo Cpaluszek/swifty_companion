@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:swifty_companion/core/model/skill_model.dart';
 import 'package:swifty_companion/modules/home_screen/widget/scrollable_modal_bottom_sheet.dart';
 
-class SkillsModalBottomSheet extends StatelessWidget {
+class SkillsBottomSheet extends StatelessWidget {
   final List<SkillModel> skills;
 
-  const SkillsModalBottomSheet({super.key, required this.skills});
+  const SkillsBottomSheet({super.key, required this.skills});
 
   @override
   Widget build(BuildContext context) {

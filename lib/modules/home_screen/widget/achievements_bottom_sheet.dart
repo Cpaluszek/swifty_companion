@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:swifty_companion/core/model/achievement_model.dart';
 import 'package:swifty_companion/modules/home_screen/widget/scrollable_modal_bottom_sheet.dart';
 
-class AchievementsModalBottomSheet extends StatelessWidget {
+class AchievementsBottomSheet extends StatelessWidget {
   final List<AchievementModel> achievements;
 
-  const AchievementsModalBottomSheet({super.key, required this.achievements});
+  const AchievementsBottomSheet({super.key, required this.achievements});
 
   @override
   Widget build(BuildContext context) {
