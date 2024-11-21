@@ -48,6 +48,9 @@ mixin _$UserModel {
   List<CampusModel> get campus => throw _privateConstructorUsedError;
   @JsonKey(name: 'cursus_users')
   List<CursusUsersModel> get cursusUsers => throw _privateConstructorUsedError;
+  @JsonKey(name: 'projects_users')
+  List<ProjectUsersModel> get projectUsers =>
+      throw _privateConstructorUsedError;
   List<AchievementModel> get achievements => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -81,6 +84,7 @@ abstract class $UserModelCopyWith<$Res> {
       @JsonKey(name: 'active?') bool isActive,
       List<CampusModel> campus,
       @JsonKey(name: 'cursus_users') List<CursusUsersModel> cursusUsers,
+      @JsonKey(name: 'projects_users') List<ProjectUsersModel> projectUsers,
       List<AchievementModel> achievements});
 
   $ImageModelCopyWith<$Res> get image;
@@ -118,6 +122,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? isActive = null,
     Object? campus = null,
     Object? cursusUsers = null,
+    Object? projectUsers = null,
     Object? achievements = null,
   }) {
     return _then(_value.copyWith(
@@ -197,6 +202,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.cursusUsers
           : cursusUsers // ignore: cast_nullable_to_non_nullable
               as List<CursusUsersModel>,
+      projectUsers: null == projectUsers
+          ? _value.projectUsers
+          : projectUsers // ignore: cast_nullable_to_non_nullable
+              as List<ProjectUsersModel>,
       achievements: null == achievements
           ? _value.achievements
           : achievements // ignore: cast_nullable_to_non_nullable
@@ -241,6 +250,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       @JsonKey(name: 'active?') bool isActive,
       List<CampusModel> campus,
       @JsonKey(name: 'cursus_users') List<CursusUsersModel> cursusUsers,
+      @JsonKey(name: 'projects_users') List<ProjectUsersModel> projectUsers,
       List<AchievementModel> achievements});
 
   @override
@@ -277,6 +287,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? isActive = null,
     Object? campus = null,
     Object? cursusUsers = null,
+    Object? projectUsers = null,
     Object? achievements = null,
   }) {
     return _then(_$UserModelImpl(
@@ -356,6 +367,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value._cursusUsers
           : cursusUsers // ignore: cast_nullable_to_non_nullable
               as List<CursusUsersModel>,
+      projectUsers: null == projectUsers
+          ? _value._projectUsers
+          : projectUsers // ignore: cast_nullable_to_non_nullable
+              as List<ProjectUsersModel>,
       achievements: null == achievements
           ? _value._achievements
           : achievements // ignore: cast_nullable_to_non_nullable
@@ -389,9 +404,12 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
       required final List<CampusModel> campus,
       @JsonKey(name: 'cursus_users')
       required final List<CursusUsersModel> cursusUsers,
+      @JsonKey(name: 'projects_users')
+      required final List<ProjectUsersModel> projectUsers,
       required final List<AchievementModel> achievements})
       : _campus = campus,
         _cursusUsers = cursusUsers,
+        _projectUsers = projectUsers,
         _achievements = achievements,
         super._();
 
@@ -457,6 +475,15 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
     return EqualUnmodifiableListView(_cursusUsers);
   }
 
+  final List<ProjectUsersModel> _projectUsers;
+  @override
+  @JsonKey(name: 'projects_users')
+  List<ProjectUsersModel> get projectUsers {
+    if (_projectUsers is EqualUnmodifiableListView) return _projectUsers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_projectUsers);
+  }
+
   final List<AchievementModel> _achievements;
   @override
   List<AchievementModel> get achievements {
@@ -467,7 +494,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(id: $id, email: $email, login: $login, firstName: $firstName, lastName: $lastName, url: $url, phone: $phone, kind: $kind, displayName: $displayName, location: $location, wallet: $wallet, evaluationPoints: $evaluationPoints, image: $image, poolMonth: $poolMonth, poolYear: $poolYear, isAlumni: $isAlumni, isActive: $isActive, campus: $campus, cursusUsers: $cursusUsers, achievements: $achievements)';
+    return 'UserModel(id: $id, email: $email, login: $login, firstName: $firstName, lastName: $lastName, url: $url, phone: $phone, kind: $kind, displayName: $displayName, location: $location, wallet: $wallet, evaluationPoints: $evaluationPoints, image: $image, poolMonth: $poolMonth, poolYear: $poolYear, isAlumni: $isAlumni, isActive: $isActive, campus: $campus, cursusUsers: $cursusUsers, projectUsers: $projectUsers, achievements: $achievements)';
   }
 
   @override
@@ -494,6 +521,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('isActive', isActive))
       ..add(DiagnosticsProperty('campus', campus))
       ..add(DiagnosticsProperty('cursusUsers', cursusUsers))
+      ..add(DiagnosticsProperty('projectUsers', projectUsers))
       ..add(DiagnosticsProperty('achievements', achievements));
   }
 
@@ -532,6 +560,8 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
             const DeepCollectionEquality()
                 .equals(other._cursusUsers, _cursusUsers) &&
             const DeepCollectionEquality()
+                .equals(other._projectUsers, _projectUsers) &&
+            const DeepCollectionEquality()
                 .equals(other._achievements, _achievements));
   }
 
@@ -558,6 +588,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
         isActive,
         const DeepCollectionEquality().hash(_campus),
         const DeepCollectionEquality().hash(_cursusUsers),
+        const DeepCollectionEquality().hash(_projectUsers),
         const DeepCollectionEquality().hash(_achievements)
       ]);
 
@@ -597,6 +628,8 @@ abstract class _UserModel extends UserModel {
       required final List<CampusModel> campus,
       @JsonKey(name: 'cursus_users')
       required final List<CursusUsersModel> cursusUsers,
+      @JsonKey(name: 'projects_users')
+      required final List<ProjectUsersModel> projectUsers,
       required final List<AchievementModel> achievements}) = _$UserModelImpl;
   const _UserModel._() : super._();
 
@@ -650,6 +683,9 @@ abstract class _UserModel extends UserModel {
   @override
   @JsonKey(name: 'cursus_users')
   List<CursusUsersModel> get cursusUsers;
+  @override
+  @JsonKey(name: 'projects_users')
+  List<ProjectUsersModel> get projectUsers;
   @override
   List<AchievementModel> get achievements;
   @override

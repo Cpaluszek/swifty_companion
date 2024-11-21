@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:swifty_companion/core/model/user_model.dart';
 import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
 import 'package:swifty_companion/modules/home_screen/widget/achievements_bottom_sheet.dart';
+import 'package:swifty_companion/modules/home_screen/widget/projects_bottom_sheet.dart';
 import 'package:swifty_companion/modules/home_screen/widget/skills_bottom_sheet.dart';
 
 class UserInfoWidget extends StatelessWidget {
@@ -62,7 +63,7 @@ class UserDetails extends StatelessWidget {
         ModalButton(
           title: 'Projects',
           icon: Icons.cases_outlined,
-          modal: SkillsBottomSheet(skills: user.getAllSkills()),
+          modal: ProjectsBottomSheet(projects: user.projectUsers),
         ),
       ],
     );

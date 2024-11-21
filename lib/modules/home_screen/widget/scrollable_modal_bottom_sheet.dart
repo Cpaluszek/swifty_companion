@@ -36,8 +36,8 @@ class ScrollableModalBottomSheet<T> extends StatelessWidget {
 
     return DraggableScrollableSheet(
       expand: false,
-      initialChildSize: 0.6,
-      minChildSize: 0.3,
+      initialChildSize: 1,
+      minChildSize: 0.5,
       maxChildSize: 1,
       builder: (context, scrollController) {
         return Container(

@@ -6,6 +6,7 @@ import 'package:swifty_companion/core/model/achievement_model.dart';
 import 'package:swifty_companion/core/model/campus_model.dart';
 import 'package:swifty_companion/core/model/cursus_users_model.dart';
 import 'package:swifty_companion/core/model/image_model.dart';
+import 'package:swifty_companion/core/model/project_users_model.dart';
 import 'package:swifty_companion/core/model/skill_model.dart';
 
 part 'user_model.freezed.dart';
@@ -36,6 +37,7 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'active?') required bool isActive,
     required List<CampusModel> campus,
     @JsonKey(name: 'cursus_users') required List<CursusUsersModel> cursusUsers,
+    @JsonKey(name: 'projects_users') required List<ProjectUsersModel> projectUsers,
     required List<AchievementModel> achievements,
   }) = _UserModel;
 
