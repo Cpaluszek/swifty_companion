@@ -1,5 +1,6 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
 
 part 'project_users_model.freezed.dart';
 part 'project_users_model.g.dart';
@@ -15,10 +16,10 @@ class ProjectUsersModel with _$ProjectUsersModel {
     @JsonKey(name: 'final_mark') required int? finalMark,
     @JsonKey(name: 'validated?') required bool? isValidated,
     required ProjectModel project,
+    @JsonKey(name: 'cursus_ids') required List<int> cursusIds,
   }) = _ProjectUsersModel;
 
-  factory ProjectUsersModel.fromJson(Map<String, Object?> json) =>
-      _$ProjectUsersModelFromJson(json);
+  factory ProjectUsersModel.fromJson(Map<String, Object?> json) => _$ProjectUsersModelFromJson(json);
 }
 
 @freezed
@@ -33,6 +34,5 @@ class ProjectModel with _$ProjectModel {
     @JsonKey(name: 'parent_id') required int? parentId,
   }) = _ProjectModel;
 
-  factory ProjectModel.fromJson(Map<String, Object?> json) =>
-      _$ProjectModelFromJson(json);
+  factory ProjectModel.fromJson(Map<String, Object?> json) => _$ProjectModelFromJson(json);
 }

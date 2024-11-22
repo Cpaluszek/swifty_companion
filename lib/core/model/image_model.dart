@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -14,8 +16,7 @@ class ImageModel with _$ImageModel {
     required ImageVersions versions,
   }) = _ImageModel;
 
-  factory ImageModel.fromJson(Map<String, Object?> json) =>
-      _$ImageModelFromJson(json);
+  factory ImageModel.fromJson(Map<String, Object?> json) => _$ImageModelFromJson(json);
 }
 
 @freezed
@@ -30,6 +31,5 @@ class ImageVersions with _$ImageVersions {
     required String micro,
   }) = _ImageVersions;
 
-  factory ImageVersions.fromJson(Map<String, Object?> json) =>
-      _$ImageVersionsFromJson(json);
+  factory ImageVersions.fromJson(Map<String, Object?> json) => _$ImageVersionsFromJson(json);
 }

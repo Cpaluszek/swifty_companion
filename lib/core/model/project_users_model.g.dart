@@ -14,6 +14,9 @@ _$ProjectUsersModelImpl _$$ProjectUsersModelImplFromJson(
       finalMark: (json['final_mark'] as num?)?.toInt(),
       isValidated: json['validated?'] as bool?,
       project: ProjectModel.fromJson(json['project'] as Map<String, dynamic>),
+      cursusIds: (json['cursus_ids'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
     );
 
 Map<String, dynamic> _$$ProjectUsersModelImplToJson(
@@ -32,6 +35,7 @@ Map<String, dynamic> _$$ProjectUsersModelImplToJson(
   writeNotNull('final_mark', instance.finalMark);
   writeNotNull('validated?', instance.isValidated);
   val['project'] = instance.project;
+  val['cursus_ids'] = instance.cursusIds;
   return val;
 }
 

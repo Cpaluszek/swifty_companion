@@ -63,7 +63,7 @@ class UserDetails extends StatelessWidget {
         ModalButton(
           title: 'Projects',
           icon: Icons.cases_outlined,
-          modal: ProjectsBottomSheet(projects: user.projectUsers),
+          modal: ProjectsBottomSheet(projects: user.getFilteredProjects(), cursus: user.cursusUsers),
         ),
       ],
     );

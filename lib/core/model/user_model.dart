@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -58,5 +60,21 @@ class UserModel with _$UserModel {
       }
     }
     return skillMap.values.toList();
+  }
+
+  List<ProjectUsersModel> getFilteredProjects() {
+    final filteredProjects = projectUsers.where((project) => project.project.parentId == null).toList();
+
+    const statusOrder = ['searching_a_group', 'in_progress', 'finished', 'other'];
+
+    filteredProjects.sort((a, b) {
+      int statusComparison = statusOrder.indexOf(a.status).compareTo(statusOrder.indexOf(b.status));
+      if (statusComparison != 0) {
+        return statusComparison;
+      }
+      return a.project.name.compareTo(b.project.name);
+    });
+
+    return filteredProjects.toList();
   }
 }

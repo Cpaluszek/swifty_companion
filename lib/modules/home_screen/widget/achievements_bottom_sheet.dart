@@ -21,6 +21,7 @@ class AchievementsBottomSheet extends StatelessWidget {
     );
   }
 
+  // TODO: use achievements categories
   Widget _buildAchievementTile(BuildContext context, AchievementModel achievement, Flavor flavor) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

@@ -27,6 +27,8 @@ mixin _$ProjectUsersModel {
   @JsonKey(name: 'validated?')
   bool? get isValidated => throw _privateConstructorUsedError;
   ProjectModel get project => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cursus_ids')
+  List<int> get cursusIds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +47,8 @@ abstract class $ProjectUsersModelCopyWith<$Res> {
       String status,
       @JsonKey(name: 'final_mark') int? finalMark,
       @JsonKey(name: 'validated?') bool? isValidated,
-      ProjectModel project});
+      ProjectModel project,
+      @JsonKey(name: 'cursus_ids') List<int> cursusIds});
 
   $ProjectModelCopyWith<$Res> get project;
 }
@@ -68,6 +71,7 @@ class _$ProjectUsersModelCopyWithImpl<$Res, $Val extends ProjectUsersModel>
     Object? finalMark = freezed,
     Object? isValidated = freezed,
     Object? project = null,
+    Object? cursusIds = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -90,6 +94,10 @@ class _$ProjectUsersModelCopyWithImpl<$Res, $Val extends ProjectUsersModel>
           ? _value.project
           : project // ignore: cast_nullable_to_non_nullable
               as ProjectModel,
+      cursusIds: null == cursusIds
+          ? _value.cursusIds
+          : cursusIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 
@@ -115,7 +123,8 @@ abstract class _$$ProjectUsersModelImplCopyWith<$Res>
       String status,
       @JsonKey(name: 'final_mark') int? finalMark,
       @JsonKey(name: 'validated?') bool? isValidated,
-      ProjectModel project});
+      ProjectModel project,
+      @JsonKey(name: 'cursus_ids') List<int> cursusIds});
 
   @override
   $ProjectModelCopyWith<$Res> get project;
@@ -137,6 +146,7 @@ class __$$ProjectUsersModelImplCopyWithImpl<$Res>
     Object? finalMark = freezed,
     Object? isValidated = freezed,
     Object? project = null,
+    Object? cursusIds = null,
   }) {
     return _then(_$ProjectUsersModelImpl(
       id: null == id
@@ -159,6 +169,10 @@ class __$$ProjectUsersModelImplCopyWithImpl<$Res>
           ? _value.project
           : project // ignore: cast_nullable_to_non_nullable
               as ProjectModel,
+      cursusIds: null == cursusIds
+          ? _value._cursusIds
+          : cursusIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -166,15 +180,16 @@ class __$$ProjectUsersModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$ProjectUsersModelImpl extends _ProjectUsersModel
-    with DiagnosticableTreeMixin {
+class _$ProjectUsersModelImpl extends _ProjectUsersModel {
   const _$ProjectUsersModelImpl(
       {required this.id,
       required this.status,
       @JsonKey(name: 'final_mark') required this.finalMark,
       @JsonKey(name: 'validated?') required this.isValidated,
-      required this.project})
-      : super._();
+      required this.project,
+      @JsonKey(name: 'cursus_ids') required final List<int> cursusIds})
+      : _cursusIds = cursusIds,
+        super._();
 
   factory _$ProjectUsersModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectUsersModelImplFromJson(json);
@@ -191,22 +206,18 @@ class _$ProjectUsersModelImpl extends _ProjectUsersModel
   final bool? isValidated;
   @override
   final ProjectModel project;
-
+  final List<int> _cursusIds;
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProjectUsersModel(id: $id, status: $status, finalMark: $finalMark, isValidated: $isValidated, project: $project)';
+  @JsonKey(name: 'cursus_ids')
+  List<int> get cursusIds {
+    if (_cursusIds is EqualUnmodifiableListView) return _cursusIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cursusIds);
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ProjectUsersModel'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('finalMark', finalMark))
-      ..add(DiagnosticsProperty('isValidated', isValidated))
-      ..add(DiagnosticsProperty('project', project));
+  String toString() {
+    return 'ProjectUsersModel(id: $id, status: $status, finalMark: $finalMark, isValidated: $isValidated, project: $project, cursusIds: $cursusIds)';
   }
 
   @override
@@ -220,13 +231,15 @@ class _$ProjectUsersModelImpl extends _ProjectUsersModel
                 other.finalMark == finalMark) &&
             (identical(other.isValidated, isValidated) ||
                 other.isValidated == isValidated) &&
-            (identical(other.project, project) || other.project == project));
+            (identical(other.project, project) || other.project == project) &&
+            const DeepCollectionEquality()
+                .equals(other._cursusIds, _cursusIds));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, status, finalMark, isValidated, project);
+  int get hashCode => Object.hash(runtimeType, id, status, finalMark,
+      isValidated, project, const DeepCollectionEquality().hash(_cursusIds));
 
   @JsonKey(ignore: true)
   @override
@@ -245,11 +258,13 @@ class _$ProjectUsersModelImpl extends _ProjectUsersModel
 
 abstract class _ProjectUsersModel extends ProjectUsersModel {
   const factory _ProjectUsersModel(
-      {required final int id,
-      required final String status,
-      @JsonKey(name: 'final_mark') required final int? finalMark,
-      @JsonKey(name: 'validated?') required final bool? isValidated,
-      required final ProjectModel project}) = _$ProjectUsersModelImpl;
+          {required final int id,
+          required final String status,
+          @JsonKey(name: 'final_mark') required final int? finalMark,
+          @JsonKey(name: 'validated?') required final bool? isValidated,
+          required final ProjectModel project,
+          @JsonKey(name: 'cursus_ids') required final List<int> cursusIds}) =
+      _$ProjectUsersModelImpl;
   const _ProjectUsersModel._() : super._();
 
   factory _ProjectUsersModel.fromJson(Map<String, dynamic> json) =
@@ -267,6 +282,9 @@ abstract class _ProjectUsersModel extends ProjectUsersModel {
   bool? get isValidated;
   @override
   ProjectModel get project;
+  @override
+  @JsonKey(name: 'cursus_ids')
+  List<int> get cursusIds;
   @override
   @JsonKey(ignore: true)
   _$$ProjectUsersModelImplCopyWith<_$ProjectUsersModelImpl> get copyWith =>
@@ -398,7 +416,7 @@ class __$$ProjectModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$ProjectModelImpl extends _ProjectModel with DiagnosticableTreeMixin {
+class _$ProjectModelImpl extends _ProjectModel {
   const _$ProjectModelImpl(
       {required this.id,
       required this.name,
@@ -420,19 +438,8 @@ class _$ProjectModelImpl extends _ProjectModel with DiagnosticableTreeMixin {
   final int? parentId;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ProjectModel(id: $id, name: $name, slug: $slug, parentId: $parentId)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ProjectModel'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('slug', slug))
-      ..add(DiagnosticsProperty('parentId', parentId));
   }
 
   @override
