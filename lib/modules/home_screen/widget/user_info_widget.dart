@@ -15,15 +15,34 @@ class UserInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final flavor = Provider.of<Flavor>(context);
     return BlocBuilder<BaseUserBloc, UserState>(
       bloc: userBloc,
       builder: (context, state) {
         if (state is UserLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(
+              color: flavor.text,
+            ),
+          );
         } else if (state is UserLoaded) {
           return UserDetails(user: state.user);
         } else if (state is UserError) {
-          return Center(child: Text('Error: ${state.error}'));
+          final flavor = Provider.of<Flavor>(context);
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.error_outline, color: flavor.red, size: 48),
+                const SizedBox(height: 8),
+                Text(
+                  state.error,
+                  style: TextStyle(color: flavor.red, fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          );
         } else {
           return const Center(child: Text('No Data'));
         }
@@ -56,13 +75,13 @@ class UserDetails extends StatelessWidget {
           icon: Icons.star_border,
           modal: AchievementsBottomSheet(achievements: user.achievements),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         ModalButton(
           title: 'Skills',
           icon: Icons.lightbulb_outline,
           modal: SkillsBottomSheet(skills: user.getAllSkills()),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         ModalButton(
           title: 'Projects',
           icon: Icons.cases_outlined,
@@ -199,7 +218,7 @@ class CursusInformation extends StatelessWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

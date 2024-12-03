@@ -19,7 +19,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   BaseUserBloc getUserBloc(BuildContext context) {
     var searchedUserBloc = context.read<SearchedUserBloc>();
-    return searchedUserBloc.state is! UserInitial ? context.read<SearchedUserBloc>() : context.read<UserBloc>();
+    return searchedUserBloc.state is UserLoaded || searchedUserBloc.state is UserLoading
+        ? context.read<SearchedUserBloc>()
+        : context.read<UserBloc>();
   }
 
   IconButton getAppBarAction(BuildContext context) {
@@ -72,6 +74,14 @@ class _HomeScreenState extends State<HomeScreen> {
             BlocListener<SearchedUserBloc, UserState>(
               listener: (context, state) {
                 setState(() {});
+                if (state is UserError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content:
+                          Text(state.error, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    ),
+                  );
+                }
               },
             ),
           ],

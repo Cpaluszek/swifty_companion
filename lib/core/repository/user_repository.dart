@@ -31,7 +31,20 @@ class UserRepositoryImpl implements UserRepository {
     try {
       return await userClient.getUserByUsername(username);
     } catch (e) {
-      throw Exception('Failed to fetch user data: ${e.toString()}');
+      if (e is DioException && e.response?.statusCode == 404) {
+        throw UsernameNotFoundException('Username \'$username\' not found');
+      } else {
+        throw Exception('Failed to fetch user data: ${e.toString()}');
+      }
     }
   }
+}
+
+class UsernameNotFoundException implements Exception {
+  final String message;
+
+  UsernameNotFoundException(this.message);
+
+  @override
+  String toString() => message;
 }

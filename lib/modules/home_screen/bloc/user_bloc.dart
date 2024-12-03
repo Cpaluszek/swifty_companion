@@ -24,9 +24,6 @@ abstract class BaseUserBloc extends Bloc<UserEvent, UserState> {
       final user = await userRepositoryImpl.getMe();
       emit(UserLoaded(user));
     } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching user data: ${e.toString()}');
-      }
       emit(UserError(e.toString()));
     }
   }
@@ -37,10 +34,11 @@ abstract class BaseUserBloc extends Bloc<UserEvent, UserState> {
       final user = await userRepositoryImpl.getUserByUsername(event.username);
       emit(UserLoaded(user));
     } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching user data: ${e.toString()}');
+      if (e is UsernameNotFoundException) {
+        emit(UserError(e.message));
+      } else {
+        emit(UserError(e.toString()));
       }
-      emit(UserError(e.toString()));
     }
   }
 }
