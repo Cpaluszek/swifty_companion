@@ -66,8 +66,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               style: TextStyle(color: flavor.text),
               inputFormatters: [LengthLimitingTextInputFormatter(20)],
               onSubmitted: (query) {
-                // widget.focusNode.unfocus();
-                widget.onSearch(query);
+                widget.onSearch(query.trim());
               },
             ),
           ),
@@ -75,7 +74,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             icon: Icon(Icons.search, size: 20, color: flavor.text),
             onPressed: () {
               widget.focusNode.unfocus();
-              widget.onSearch(widget.controller.text);
+              widget.onSearch(widget.controller.text.trim());
             },
           )
         ],
