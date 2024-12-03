@@ -111,9 +111,14 @@ class UserProfileHeader extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                user.displayName,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              SizedBox(
+                width: 200,
+                child: Text(
+                  user.displayName,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  maxLines: 2,
+                  softWrap: true,
+                ),
               ),
               Text(
                 user.login,
@@ -140,7 +145,7 @@ class InfoChips extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildChip(label: 'Campus: $campus', flavor: flavor),
-        const SizedBox(width: 24),
+        const SizedBox(width: 20),
         _buildChip(label: 'Location: $location', flavor: flavor),
       ],
     );
@@ -151,9 +156,9 @@ class InfoChips extends StatelessWidget {
       backgroundColor: flavor.mantle,
       label: Text(
         label,
-        style: const TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 14),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 6),
     );
   }
 }
@@ -255,21 +260,42 @@ class CursusInformation extends StatelessWidget {
   }
 
   Widget _buildProgressBar(double level, Flavor flavor) {
+    final decimalPart = level - level.truncateToDouble();
+    final textColor = decimalPart > 0.5 ? flavor.surface1 : flavor.text;
+
     return Stack(
-      alignment: Alignment.center,
+      // alignment: Alignment.center,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: LinearProgressIndicator(
-            value: level - level.truncateToDouble(),
-            color: flavor.lavender,
-            backgroundColor: flavor.lavender.withOpacity(.2),
-            minHeight: 20,
+        // Background
+        Container(
+          height: 20,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: flavor.lavender.withOpacity(0.2),
           ),
         ),
-        Text(
-          'Level ${level.toStringAsFixed(2)}',
-          style: TextStyle(color: flavor.surface1, fontWeight: FontWeight.bold),
+        // Filled gradient bar
+        FractionallySizedBox(
+          alignment: Alignment.centerLeft,
+          widthFactor: decimalPart,
+          child: Container(
+            height: 20,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              gradient: LinearGradient(
+                colors: [flavor.mauve, flavor.lavender],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+        ),
+        // Text overlay
+        Center(
+          child: Text(
+            'Level ${level.toStringAsFixed(2)}',
+            style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );
