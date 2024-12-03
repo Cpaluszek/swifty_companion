@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swifty_companion/core/network/dio_configuration.dart';
 import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
-import 'package:swifty_companion/modules/home_screen/widget/search_bar.dart';
+import 'package:swifty_companion/modules/home_screen/widget/search_widget.dart';
 import 'package:swifty_companion/modules/home_screen/widget/user_info_widget.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
 
@@ -18,57 +17,69 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final FocusNode _focusNode = FocusNode();
-  final TextEditingController _searchController = TextEditingController();
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    _searchController.dispose();
-    super.dispose();
+  BaseUserBloc getUserBloc(BuildContext context) {
+    var searchedUserBloc = context.read<SearchedUserBloc>();
+    return searchedUserBloc.state is! UserInitial ? context.read<SearchedUserBloc>() : context.read<UserBloc>();
   }
 
-  void _onSearchChanged(String query) {
-    // TODO: Implement search
-    print('Search: $query');
-  }
-
-  void _clearSearch() {
-    _searchController.clear();
-    _onSearchChanged('');
-  }
-
-  void _unfocus() {
-    FocusScope.of(context).unfocus();
+  IconButton getAppBarAction(BuildContext context) {
+    if (context.read<SearchedUserBloc>().state is UserLoaded) {
+      return IconButton(
+        icon: const Icon(Icons.close),
+        onPressed: () => context.read<SearchedUserBloc>().add(ClearSearchedUser()),
+      );
+    } else {
+      return IconButton(
+        icon: const Icon(Icons.logout),
+        onPressed: () => context.read<AuthBloc>().add(LogoutRequested()),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final dioService = RepositoryProvider.of<DioConfiguration>(context);
+    final searchController = TextEditingController();
+    final focusNode = FocusNode();
 
-    return BlocProvider(
-      create: (context) => UserBloc(dio: dioService.dio)..add(FetchProfileRequested()),
-      child: GestureDetector(
-        onTap: _unfocus,
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: SearchWidget(
-              controller: _searchController,
-              focusNode: _focusNode,
-              onChanged: _onSearchChanged,
-              onClear: _clearSearch,
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.logout),
-                onPressed: () => context.read<AuthBloc>().add(LogoutRequested()),
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        if (!focusNode.hasFocus) {
+          FocusScope.of(context).unfocus();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: SearchWidget(
+            controller: searchController,
+            focusNode: focusNode,
+            onSearch: (query) {
+              if (query.isNotEmpty) {
+                context.read<SearchedUserBloc>().add(FetchProfileByUsername(query));
+              }
+            },
+            onClear: () => searchController.clear(),
           ),
-          body: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: UserInfoWidget(),
+          actions: [getAppBarAction(context)],
+        ),
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<UserBloc, UserState>(
+              listener: (context, state) {
+                setState(() {});
+              },
+            ),
+            BlocListener<SearchedUserBloc, UserState>(
+              listener: (context, state) {
+                setState(() {});
+              },
+            ),
+          ],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: UserInfoWidget(
+              userBloc: getUserBloc(context),
+            ),
           ),
         ),
       ),

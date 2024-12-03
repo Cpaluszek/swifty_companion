@@ -9,11 +9,14 @@ import 'package:swifty_companion/modules/home_screen/widget/projects_bottom_shee
 import 'package:swifty_companion/modules/home_screen/widget/skills_bottom_sheet.dart';
 
 class UserInfoWidget extends StatelessWidget {
-  const UserInfoWidget({super.key});
+  final BaseUserBloc userBloc;
+
+  const UserInfoWidget({super.key, required this.userBloc});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocBuilder<BaseUserBloc, UserState>(
+      bloc: userBloc,
       builder: (context, state) {
         if (state is UserLoading) {
           return const Center(child: CircularProgressIndicator());

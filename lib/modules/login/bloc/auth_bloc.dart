@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:oauth2_client/oauth2_exception.dart';
-import 'package:swifty_companion/config/env_config.dart';
+import 'package:swifty_companion/config/app_config.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
 
@@ -22,8 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // You should persist the authentication token securely (e.g., using flutter_secure_storage) so that users don’t have to log in every time they open the app.
   // You can load the token in the AuthBloc during initialization and use it in subsequent API calls.
 
-  Future<void> _onLoginRequested(
-      LoginRequested event, Emitter<AuthState> emit) async {
+  Future<void> _onLoginRequested(LoginRequested event, Emitter<AuthState> emit) async {
     emit(const AuthLoading());
 
     final client = OAuth2Client(

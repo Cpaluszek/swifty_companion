@@ -12,6 +12,7 @@ class AppConfig {
   static late final String redirectUri;
 
   static const String me = '/v2/me';
+  static const String user = '/v2/users/{username}';
 
   static Future<void> loadEnv() async {
     await dotenv.load(fileName: '.env');

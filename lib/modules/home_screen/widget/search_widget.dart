@@ -2,19 +2,18 @@ import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:swifty_companion/debounce.dart';
 
 class SearchWidget extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
-  final Function(String) onChanged;
+  final Function(String) onSearch;
   final VoidCallback onClear;
 
   const SearchWidget({
     super.key,
     required this.controller,
     required this.focusNode,
-    required this.onChanged,
+    required this.onSearch,
     required this.onClear,
   });
 
@@ -53,8 +52,6 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: Row(
         children: [
           const SizedBox(width: 8),
-          Icon(Icons.search, color: flavor.text),
-          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               focusNode: widget.focusNode,
@@ -68,17 +65,19 @@ class _SearchWidgetState extends State<SearchWidget> {
               ),
               style: TextStyle(color: flavor.text),
               inputFormatters: [LengthLimitingTextInputFormatter(20)],
-              onChanged: (query) => debounce(
-                duration: const Duration(milliseconds: 300),
-                callback: () => widget.onChanged(query),
-              ),
+              onSubmitted: (query) {
+                // widget.focusNode.unfocus();
+                widget.onSearch(query);
+              },
             ),
           ),
-          if (widget.controller.text.isNotEmpty)
-            IconButton(
-              icon: Icon(Icons.clear, size: 20, color: flavor.text),
-              onPressed: widget.onClear,
-            ),
+          IconButton(
+            icon: Icon(Icons.search, size: 20, color: flavor.text),
+            onPressed: () {
+              widget.focusNode.unfocus();
+              widget.onSearch(widget.controller.text);
+            },
+          )
         ],
       ),
     );

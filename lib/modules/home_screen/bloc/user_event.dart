@@ -6,3 +6,11 @@ abstract class UserEvent extends Equatable {
 }
 
 class FetchProfileRequested extends UserEvent {}
+
+class FetchProfileByUsername extends UserEvent {
+  final String username;
+
+  FetchProfileByUsername(this.username);
+}
+
+class ClearSearchedUser extends UserEvent {}

@@ -1,10 +1,11 @@
 import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:swifty_companion/config/env_config.dart';
+import 'package:swifty_companion/config/app_config.dart';
 import 'package:swifty_companion/config/theme.dart';
 import 'package:swifty_companion/core/network/dio_configuration.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
 import 'package:swifty_companion/modules/home_screen/home_screen.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
 import 'package:swifty_companion/modules/login/view/login.dart';
@@ -36,6 +37,8 @@ class MyApp extends StatelessWidget {
           lazy: false,
         ),
         RepositoryProvider(create: (context) => DioConfiguration(authBloc: context.read<AuthBloc>())),
+        BlocProvider(create: (context) => UserBloc(dio: context.read<DioConfiguration>().dio)),
+        BlocProvider(create: (context) => SearchedUserBloc(dio: context.read<DioConfiguration>().dio)),
       ],
       child: const AuthWrapper(),
     );
@@ -71,6 +74,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
         return BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
+              context.read<UserBloc>().add(FetchProfileRequested());
               _navigator.pushAndRemoveUntil<void>(
                 HomeScreen.route(),
                 (route) => false,

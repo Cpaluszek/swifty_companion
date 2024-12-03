@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:swifty_companion/config/env_config.dart';
+import 'package:swifty_companion/config/app_config.dart';
 import 'package:swifty_companion/core/model/user_model.dart';
 
 part 'user_client.g.dart';
@@ -13,4 +13,7 @@ abstract class UserClient {
 
   @GET(AppConfig.me)
   Future<UserModel> getMe();
+
+  @GET(AppConfig.user)
+  Future<UserModel> getUserByUsername(@Path('username') String username);
 }
