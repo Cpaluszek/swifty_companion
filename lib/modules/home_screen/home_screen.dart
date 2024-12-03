@@ -77,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is UserError) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
+                      duration: const Duration(seconds: 5),
                       content:
                           Text(state.error, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
@@ -86,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(12.0),
             child: UserInfoWidget(
               userBloc: getUserBloc(context),
             ),
