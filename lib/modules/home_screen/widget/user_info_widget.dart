@@ -264,7 +264,6 @@ class CursusInformation extends StatelessWidget {
     final textColor = decimalPart > 0.5 ? flavor.surface1 : flavor.text;
 
     return Stack(
-      // alignment: Alignment.center,
       children: [
         // Background
         Container(
@@ -274,7 +273,6 @@ class CursusInformation extends StatelessWidget {
             color: flavor.lavender.withOpacity(0.2),
           ),
         ),
-        // Filled gradient bar
         FractionallySizedBox(
           alignment: Alignment.centerLeft,
           widthFactor: decimalPart,
@@ -290,7 +288,6 @@ class CursusInformation extends StatelessWidget {
             ),
           ),
         ),
-        // Text overlay
         Center(
           child: Text(
             'Level ${level.toStringAsFixed(2)}',
