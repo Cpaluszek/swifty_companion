@@ -12,3 +12,7 @@ void showErrorSnackBar(BuildContext context, String error) {
     ),
   );
 }
+
+bool isTokenExpired(DateTime expiration) {
+  return expiration.isBefore(DateTime.now());
+}
