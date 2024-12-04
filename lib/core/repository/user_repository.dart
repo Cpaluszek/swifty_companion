@@ -27,7 +27,6 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<UserModel> getUserByUsername(String username) async {
-    // TODO: set a cache system?
     try {
       return await userClient.getUserByUsername(username);
     } catch (e) {
