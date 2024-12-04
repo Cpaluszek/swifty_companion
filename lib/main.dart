@@ -58,12 +58,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
 
-  /* TODO: test this
-  You’re using a NavigatorKey and manually handling navigation in the AuthWrapper.
-  While this works, another approach would be to use the auto_route package or other navigation libraries that simplify complex routing scenarios,
-  especially if you need nested navigation or more complex routes
-   */
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
