@@ -4,6 +4,7 @@ import 'package:swifty_companion/modules/home_screen/bloc/user_bloc.dart';
 import 'package:swifty_companion/modules/home_screen/widget/search_widget.dart';
 import 'package:swifty_companion/modules/home_screen/widget/user_info_widget.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
+import 'package:swifty_companion/utils.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -75,13 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               listener: (context, state) {
                 setState(() {});
                 if (state is UserError) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: const Duration(seconds: 5),
-                      content:
-                          Text(state.error, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                    ),
-                  );
+                  showErrorSnackBar(context, state.error);
                 }
               },
             ),

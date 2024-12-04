@@ -11,6 +11,7 @@ import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
 import 'package:swifty_companion/modules/login/view/login.dart';
 import 'package:swifty_companion/modules/splash_page.dart';
 import 'package:provider/provider.dart';
+import 'package:swifty_companion/utils.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -85,11 +86,8 @@ class _AuthWrapperState extends State<AuthWrapper> {
                 (route) => false,
               );
             } else {
-              // TODO: test this
               if (state is AuthFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.error)),
-                );
+                showErrorSnackBar(context, state.error);
               }
               _navigator.pushAndRemoveUntil<void>(
                 LoginScreen.route(),
