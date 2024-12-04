@@ -62,7 +62,7 @@ class UserDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         UserProfileHeader(user: user),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         InfoChips(
           campus: user.campus.isNotEmpty ? user.campus.first.name : 'N/A',
           location: user.location ?? 'N/A',
@@ -105,7 +105,7 @@ class UserProfileHeader extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundImage: NetworkImage(user.image.versions.small),
-            radius: 50,
+            radius: 42,
           ),
           const SizedBox(width: 16),
           Column(
@@ -219,7 +219,7 @@ class CursusInformation extends StatelessWidget {
     }
 
     final flavor = Provider.of<Flavor>(context);
-    final lastCursus = user.cursusUsers.last;
+    final currentCursus = user.getMainCursus();
 
     return Card(
       child: Padding(
@@ -227,9 +227,9 @@ class CursusInformation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeaderRow(lastCursus.cursus.name, lastCursus.grade ?? 'N/A'),
+            _buildHeaderRow(currentCursus.cursus.name, currentCursus.grade ?? 'N/A'),
             const SizedBox(height: 12),
-            _buildProgressBar(lastCursus.level, flavor),
+            _buildProgressBar(currentCursus.level, flavor),
             const SizedBox(height: 16),
             _buildInfoRow(Icons.assessment_outlined, 'Evaluation Points:', '${user.evaluationPoints}', flavor),
             const SizedBox(height: 8),
@@ -248,51 +248,33 @@ class CursusInformation extends StatelessWidget {
       children: [
         Text(
           cursusName,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(width: 64),
+        const SizedBox(width: 48),
         Text(
           grade,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ],
     );
   }
 
   Widget _buildProgressBar(double level, Flavor flavor) {
-    final decimalPart = level - level.truncateToDouble();
-    final textColor = decimalPart > 0.5 ? flavor.surface1 : flavor.text;
-
     return Stack(
+      alignment: Alignment.center,
       children: [
-        // Background
-        Container(
-          height: 20,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: flavor.lavender.withOpacity(0.2),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: LinearProgressIndicator(
+            value: level - level.truncateToDouble(),
+            color: flavor.mauve.withOpacity(0.7),
+            backgroundColor: flavor.lavender.withOpacity(.2),
+            minHeight: 20,
           ),
         ),
-        FractionallySizedBox(
-          alignment: Alignment.centerLeft,
-          widthFactor: decimalPart,
-          child: Container(
-            height: 20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              gradient: LinearGradient(
-                colors: [flavor.mauve, flavor.lavender],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-          ),
-        ),
-        Center(
-          child: Text(
-            'Level ${level.toStringAsFixed(2)}',
-            style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
-          ),
+        Text(
+          'Level ${level.toStringAsFixed(2)}',
+          style: TextStyle(color: flavor.text, fontWeight: FontWeight.bold),
         ),
       ],
     );

@@ -62,6 +62,10 @@ class UserModel with _$UserModel {
     return skillMap.values.toList();
   }
 
+  CursusUsersModel getMainCursus() {
+    return cursusUsers.firstWhere((cursus) => cursus.cursus.slug == '42cursus', orElse: () => cursusUsers.first);
+  }
+
   List<ProjectUsersModel> getFilteredProjects() {
     final filteredProjects = projectUsers.where((project) => project.project.parentId == null).toList();
 
