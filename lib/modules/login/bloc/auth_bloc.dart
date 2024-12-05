@@ -24,6 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginRequested>(_onLoginRequested);
     on<LogoutRequested>(_onLogoutRequested);
     on<InitRequested>(_onInitRequested);
+    on<RefreshCompleted>(_onRefreshCompleted);
   }
 
   Future<void> _onLoginRequested(LoginRequested event, Emitter<AuthState> emit) async {
@@ -39,9 +40,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       await _storeToken(token);
-      _emitAuthSuccess(token, emit);
+      emit(_createAuthSuccessState(token));
     } catch (e) {
-      _emitAuthFailure(e, emit);
+      emit(_createAuthFailureState(e));
     }
   }
 
@@ -64,6 +65,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       storedAccessToken = await _storage.read(key: _accessTokenKey);
       storedRefreshToken = await _storage.read(key: _refreshTokenKey);
       storedExpiration = await _storage.read(key: _expirationKey);
+      if (kDebugMode) {
+        print('Stored tokens: $storedAccessToken, $storedRefreshToken, $storedExpiration');
+      }
     } catch (e) {
       if (kDebugMode) {
         print('Failed to read stored tokens: $e');
@@ -74,7 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final expirationDate = DateTime.tryParse(storedExpiration);
       if (expirationDate != null) {
         if (isTokenExpired(expirationDate)) {
-          final refreshedToken = await refreshToken();
+          final refreshedToken = await refreshToken(refreshToken: storedRefreshToken);
           add(RefreshCompleted(refreshedToken));
         } else {
           emit(AuthSuccess(
@@ -90,7 +94,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthInitial());
   }
 
-  Future<void> onRefreshCompleted(RefreshCompleted event, Emitter<AuthState> emit) async {
+  Future<void> _onRefreshCompleted(RefreshCompleted event, Emitter<AuthState> emit) async {
     emit(event.refreshedState);
   }
 
@@ -116,39 +120,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await _storage.delete(key: _expirationKey);
   }
 
-  Future<AuthState> refreshToken() async {
-    final authState = state;
-    if (authState is! AuthSuccess) {
+  Future<AuthState> refreshToken({String? refreshToken}) async {
+    if (refreshToken == null && state is! AuthSuccess) {
       return const AuthFailure('No valid refresh token available');
     }
 
+    final currentRefreshToken = refreshToken ?? (state as AuthSuccess).refreshToken;
     final client = _createOAuth2Client();
+
     try {
       final token = await client.refreshToken(
-        authState.refreshToken,
+        currentRefreshToken,
         clientId: AppConfig.apiUid,
-        clientSecret: AppConfig.apiSecret,
-        scopes: ['public'],
       );
 
       await _storeToken(token);
-      final accessToken = token.accessToken ?? '';
-      final refreshToken = token.refreshToken ?? '';
-      final expiration = token.expirationDate ?? DateTime(0);
-
-      return AuthSuccess(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-        expiration: expiration,
-      );
+      return _createAuthSuccessState(token);
     } catch (e) {
-      if (e is DioException) {
-        return AuthFailure('Network error: ${e.message}');
-      } else if (e is OAuth2Exception) {
-        return AuthFailure('OAuth error: ${e.error}');
-      } else {
-        return AuthFailure('An unknown error occurred: ${e.toString()}');
-      }
+      return _createAuthFailureState(e);
     }
   }
 
@@ -161,25 +150,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  void _emitAuthSuccess(AccessTokenResponse token, Emitter<AuthState> emit) {
+  AuthState _createAuthFailureState(dynamic error) {
+    if (error is DioException) {
+      return AuthFailure('Network error: ${error.message}');
+    } else if (error is OAuth2Exception) {
+      return AuthFailure('OAuth error: ${error.error}');
+    } else {
+      return AuthFailure('An unknown error occurred: ${error.toString()}');
+    }
+  }
+
+  AuthState _createAuthSuccessState(AccessTokenResponse token) {
     final accessToken = token.accessToken ?? '';
     final refreshToken = token.refreshToken ?? '';
     final expiration = token.expirationDate ?? DateTime(0);
 
-    emit(AuthSuccess(
+    return AuthSuccess(
       accessToken: accessToken,
       refreshToken: refreshToken,
       expiration: expiration,
-    ));
-  }
-
-  void _emitAuthFailure(dynamic error, Emitter<AuthState> emit) {
-    if (error is DioException) {
-      emit(AuthFailure('Network error: ${error.message}'));
-    } else if (error is OAuth2Exception) {
-      emit(AuthFailure('OAuth error: ${error.error}'));
-    } else {
-      emit(AuthFailure('An unknown error occurred: ${error.toString()}'));
-    }
+    );
   }
 }
