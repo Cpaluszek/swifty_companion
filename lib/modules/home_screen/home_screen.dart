@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: SearchWidget(
             controller: searchController,
             focusNode: focusNode,
+            isLoading: context.read<SearchedUserBloc>().state is UserLoading,
             onSearch: (query) {
               if (query.isNotEmpty) {
                 context.read<SearchedUserBloc>().add(FetchProfileByUsername(query));
