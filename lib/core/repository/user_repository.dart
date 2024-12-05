@@ -18,32 +18,11 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<UserModel> getMe() async {
-    try {
-      return await userClient.getMe();
-    } catch (e) {
-      throw Exception('Failed to fetch user data: ${e.toString()}');
-    }
+    return await userClient.getMe();
   }
 
   @override
   Future<UserModel> getUserByUsername(String username) async {
-    try {
-      return await userClient.getUserByUsername(username);
-    } catch (e) {
-      if (e is DioException && e.response?.statusCode == 404) {
-        throw UsernameNotFoundException('Username \'$username\' not found');
-      } else {
-        throw Exception('Failed to fetch user data: ${e.toString()}');
-      }
-    }
+    return await userClient.getUserByUsername(username);
   }
-}
-
-class UsernameNotFoundException implements Exception {
-  final String message;
-
-  UsernameNotFoundException(this.message);
-
-  @override
-  String toString() => message;
 }

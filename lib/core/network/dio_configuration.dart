@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:swifty_companion/core/network/api_interceptor.dart';
+import 'package:swifty_companion/core/network/error_handling_interceptor.dart';
 import 'package:swifty_companion/modules/login/bloc/auth_bloc.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -15,10 +16,14 @@ class DioConfiguration {
 
   DioConfiguration({required this.authBloc}) {
     dio = Dio(kBaseOptions);
-    dio.interceptors.add(PrettyDioLogger(
-      responseBody: true,
-      requestHeader: true,
-    ));
-    dio.interceptors.add(ApiInterceptor(authBloc: authBloc));
+
+    dio.interceptors.addAll({
+      PrettyDioLogger(
+        responseBody: true,
+        requestHeader: true,
+      ),
+      ApiInterceptor(authBloc: authBloc),
+      ErrorHandlingInterceptor(),
+    });
   }
 }

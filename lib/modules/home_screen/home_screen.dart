@@ -20,9 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   BaseUserBloc getUserBloc(BuildContext context) {
     var searchedUserBloc = context.read<SearchedUserBloc>();
-    return searchedUserBloc.state is UserLoaded || searchedUserBloc.state is UserLoading
-        ? context.read<SearchedUserBloc>()
-        : context.read<UserBloc>();
+    return searchedUserBloc.state is UserLoaded ? context.read<SearchedUserBloc>() : context.read<UserBloc>();
   }
 
   IconButton getAppBarAction(BuildContext context) {

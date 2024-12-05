@@ -34,11 +34,7 @@ abstract class BaseUserBloc extends Bloc<UserEvent, UserState> {
       final user = await userRepositoryImpl.getUserByUsername(event.username);
       emit(UserLoaded(user));
     } catch (e) {
-      if (e is UsernameNotFoundException) {
-        emit(UserError(e.message));
-      } else {
-        emit(UserError(e.toString()));
-      }
+      emit(UserError(e.toString()));
     }
   }
 }

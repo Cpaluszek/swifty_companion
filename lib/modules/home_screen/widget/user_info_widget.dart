@@ -40,6 +40,14 @@ class UserInfoWidget extends StatelessWidget {
                   style: TextStyle(color: flavor.red, fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 32),
+                if (userBloc is UserBloc)
+                  ElevatedButton(
+                    onPressed: () {
+                      userBloc.add(FetchProfileRequested());
+                    },
+                    child: const Text('Retry'),
+                  )
               ],
             ),
           );
