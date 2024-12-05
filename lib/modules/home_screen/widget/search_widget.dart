@@ -86,7 +86,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(flavor.red),
+                          valueColor: AlwaysStoppedAnimation<Color>(flavor.text),
                           backgroundColor: flavor.surface2,
                         ),
                       ),
