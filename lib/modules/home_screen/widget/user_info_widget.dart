@@ -235,14 +235,14 @@ class CursusInformation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeaderRow(currentCursus.cursus.name, currentCursus.grade ?? 'N/A'),
-            const SizedBox(height: 12),
+            _buildHeaderRow(currentCursus.cursus.name, currentCursus.grade ?? 'N/A', user.isStaff, flavor),
+            const SizedBox(height: 16),
             _buildProgressBar(currentCursus.level, flavor),
             const SizedBox(height: 16),
             _buildInfoRow(Icons.assessment_outlined, 'Evaluation Points:', '${user.evaluationPoints}', flavor),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             _buildInfoRow(Icons.account_balance_wallet_outlined, 'Wallet Balance:', '\$${user.wallet}', flavor),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             _buildInfoRow(Icons.pool_outlined, 'Pool:', '${user.poolMonth} ${user.poolYear}', flavor),
           ],
         ),
@@ -250,19 +250,24 @@ class CursusInformation extends StatelessWidget {
     );
   }
 
-  Widget _buildHeaderRow(String cursusName, String grade) {
+  Widget _buildHeaderRow(String cursusName, String grade, bool isStaff, Flavor flavor) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           cursusName,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(width: 48),
-        Text(
-          grade,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
+        isStaff
+            ? Text(
+                'Staff',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: flavor.peach),
+              )
+            : Text(
+                grade,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
       ],
     );
   }

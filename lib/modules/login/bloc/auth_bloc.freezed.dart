@@ -109,12 +109,18 @@ class __$$AuthInitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthInitialImpl implements AuthInitial {
+class _$AuthInitialImpl with DiagnosticableTreeMixin implements AuthInitial {
   const _$AuthInitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthState.initial'));
   }
 
   @override
@@ -229,12 +235,18 @@ class __$$AuthLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthLoadingImpl implements AuthLoading {
+class _$AuthLoadingImpl with DiagnosticableTreeMixin implements AuthLoading {
   const _$AuthLoadingImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthState.loading'));
   }
 
   @override
@@ -374,7 +386,7 @@ class __$$AuthSuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthSuccessImpl implements AuthSuccess {
+class _$AuthSuccessImpl with DiagnosticableTreeMixin implements AuthSuccess {
   const _$AuthSuccessImpl(
       {required this.accessToken,
       required this.refreshToken,
@@ -388,8 +400,18 @@ class _$AuthSuccessImpl implements AuthSuccess {
   final DateTime expiration;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthState.success(accessToken: $accessToken, refreshToken: $refreshToken, expiration: $expiration)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthState.success'))
+      ..add(DiagnosticsProperty('accessToken', accessToken))
+      ..add(DiagnosticsProperty('refreshToken', refreshToken))
+      ..add(DiagnosticsProperty('expiration', expiration));
   }
 
   @override
@@ -543,15 +565,23 @@ class __$$AuthFailureImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthFailureImpl implements AuthFailure {
+class _$AuthFailureImpl with DiagnosticableTreeMixin implements AuthFailure {
   const _$AuthFailureImpl(this.error);
 
   @override
   final String error;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AuthState.failure(error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthState.failure'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
