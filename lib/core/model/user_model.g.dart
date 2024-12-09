@@ -19,6 +19,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       displayName: json['displayname'] as String,
       location: json['location'] as String?,
       wallet: (json['wallet'] as num).toInt(),
+      isStaff: json['staff?'] as bool,
       evaluationPoints: (json['correction_point'] as num).toInt(),
       image: ImageModel.fromJson(json['image'] as Map<String, dynamic>),
       poolMonth: json['pool_month'] as String,
@@ -60,6 +61,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) {
 
   writeNotNull('location', instance.location);
   val['wallet'] = instance.wallet;
+  val['staff?'] = instance.isStaff;
   val['correction_point'] = instance.evaluationPoints;
   val['image'] = instance.image;
   val['pool_month'] = instance.poolMonth;

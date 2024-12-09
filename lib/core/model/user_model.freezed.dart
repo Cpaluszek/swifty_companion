@@ -34,6 +34,8 @@ mixin _$UserModel {
   String get displayName => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   int get wallet => throw _privateConstructorUsedError;
+  @JsonKey(name: 'staff?')
+  bool get isStaff => throw _privateConstructorUsedError;
   @JsonKey(name: 'correction_point')
   int get evaluationPoints => throw _privateConstructorUsedError;
   ImageModel get image => throw _privateConstructorUsedError;
@@ -76,6 +78,7 @@ abstract class $UserModelCopyWith<$Res> {
       @JsonKey(name: 'displayname') String displayName,
       String? location,
       int wallet,
+      @JsonKey(name: 'staff?') bool isStaff,
       @JsonKey(name: 'correction_point') int evaluationPoints,
       ImageModel image,
       @JsonKey(name: 'pool_month') String poolMonth,
@@ -114,6 +117,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? displayName = null,
     Object? location = freezed,
     Object? wallet = null,
+    Object? isStaff = null,
     Object? evaluationPoints = null,
     Object? image = null,
     Object? poolMonth = null,
@@ -170,6 +174,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
               as int,
+      isStaff: null == isStaff
+          ? _value.isStaff
+          : isStaff // ignore: cast_nullable_to_non_nullable
+              as bool,
       evaluationPoints: null == evaluationPoints
           ? _value.evaluationPoints
           : evaluationPoints // ignore: cast_nullable_to_non_nullable
@@ -242,6 +250,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       @JsonKey(name: 'displayname') String displayName,
       String? location,
       int wallet,
+      @JsonKey(name: 'staff?') bool isStaff,
       @JsonKey(name: 'correction_point') int evaluationPoints,
       ImageModel image,
       @JsonKey(name: 'pool_month') String poolMonth,
@@ -279,6 +288,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? displayName = null,
     Object? location = freezed,
     Object? wallet = null,
+    Object? isStaff = null,
     Object? evaluationPoints = null,
     Object? image = null,
     Object? poolMonth = null,
@@ -335,6 +345,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
               as int,
+      isStaff: null == isStaff
+          ? _value.isStaff
+          : isStaff // ignore: cast_nullable_to_non_nullable
+              as bool,
       evaluationPoints: null == evaluationPoints
           ? _value.evaluationPoints
           : evaluationPoints // ignore: cast_nullable_to_non_nullable
@@ -395,6 +409,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
       @JsonKey(name: 'displayname') required this.displayName,
       required this.location,
       required this.wallet,
+      @JsonKey(name: 'staff?') required this.isStaff,
       @JsonKey(name: 'correction_point') required this.evaluationPoints,
       required this.image,
       @JsonKey(name: 'pool_month') required this.poolMonth,
@@ -441,6 +456,9 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
   final String? location;
   @override
   final int wallet;
+  @override
+  @JsonKey(name: 'staff?')
+  final bool isStaff;
   @override
   @JsonKey(name: 'correction_point')
   final int evaluationPoints;
@@ -494,7 +512,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(id: $id, email: $email, login: $login, firstName: $firstName, lastName: $lastName, url: $url, phone: $phone, kind: $kind, displayName: $displayName, location: $location, wallet: $wallet, evaluationPoints: $evaluationPoints, image: $image, poolMonth: $poolMonth, poolYear: $poolYear, isAlumni: $isAlumni, isActive: $isActive, campus: $campus, cursusUsers: $cursusUsers, projectUsers: $projectUsers, achievements: $achievements)';
+    return 'UserModel(id: $id, email: $email, login: $login, firstName: $firstName, lastName: $lastName, url: $url, phone: $phone, kind: $kind, displayName: $displayName, location: $location, wallet: $wallet, isStaff: $isStaff, evaluationPoints: $evaluationPoints, image: $image, poolMonth: $poolMonth, poolYear: $poolYear, isAlumni: $isAlumni, isActive: $isActive, campus: $campus, cursusUsers: $cursusUsers, projectUsers: $projectUsers, achievements: $achievements)';
   }
 
   @override
@@ -513,6 +531,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('location', location))
       ..add(DiagnosticsProperty('wallet', wallet))
+      ..add(DiagnosticsProperty('isStaff', isStaff))
       ..add(DiagnosticsProperty('evaluationPoints', evaluationPoints))
       ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('poolMonth', poolMonth))
@@ -545,6 +564,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.wallet, wallet) || other.wallet == wallet) &&
+            (identical(other.isStaff, isStaff) || other.isStaff == isStaff) &&
             (identical(other.evaluationPoints, evaluationPoints) ||
                 other.evaluationPoints == evaluationPoints) &&
             (identical(other.image, image) || other.image == image) &&
@@ -580,6 +600,7 @@ class _$UserModelImpl extends _UserModel with DiagnosticableTreeMixin {
         displayName,
         location,
         wallet,
+        isStaff,
         evaluationPoints,
         image,
         poolMonth,
@@ -619,6 +640,7 @@ abstract class _UserModel extends UserModel {
       @JsonKey(name: 'displayname') required final String displayName,
       required final String? location,
       required final int wallet,
+      @JsonKey(name: 'staff?') required final bool isStaff,
       @JsonKey(name: 'correction_point') required final int evaluationPoints,
       required final ImageModel image,
       @JsonKey(name: 'pool_month') required final String poolMonth,
@@ -661,6 +683,9 @@ abstract class _UserModel extends UserModel {
   String? get location;
   @override
   int get wallet;
+  @override
+  @JsonKey(name: 'staff?')
+  bool get isStaff;
   @override
   @JsonKey(name: 'correction_point')
   int get evaluationPoints;

@@ -31,6 +31,7 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'displayname') required String displayName,
     required String? location,
     required int wallet,
+    @JsonKey(name: 'staff?') required bool isStaff,
     @JsonKey(name: 'correction_point') required int evaluationPoints,
     required ImageModel image,
     @JsonKey(name: 'pool_month') required String poolMonth,
