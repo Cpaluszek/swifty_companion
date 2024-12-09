@@ -18,40 +18,47 @@ class ProjectsBottomSheet extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      child: ListView(
-        children: groupedProject.entries.map(
-          (entry) {
-            final cursusId = entry.key;
-            final projectList = entry.value;
-
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              decoration: BoxDecoration(color: flavor.base, borderRadius: BorderRadius.circular(12), boxShadow: [
-                BoxShadow(
-                  color: flavor.crust.withOpacity(0.1),
-                  blurRadius: 4,
-                ),
-              ]),
-              child: ExpansionTile(
-                leading: CircleAvatar(
-                  backgroundColor: flavor.surface0,
-                  child: Icon(_getCursusIcon(cursusId), color: flavor.text),
-                ),
-                collapsedBackgroundColor: Colors.transparent,
-                backgroundColor: flavor.base,
-                collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                iconColor: flavor.text,
-                title: Text(
-                  _getCursusName(cursus, cursusId),
-                  style: TextStyle(color: flavor.text, fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                children: projectList.map((project) => _buildProjectTile(context, project, flavor)).toList(),
+      child: projects.isEmpty
+          ? Center(
+              child: Text(
+                'No projects',
+                style: TextStyle(color: flavor.text, fontSize: 16),
               ),
-            );
-          },
-        ).toList(),
-      ),
+            )
+          : ListView(
+              children: groupedProject.entries.map(
+                (entry) {
+                  final cursusId = entry.key;
+                  final projectList = entry.value;
+
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    decoration: BoxDecoration(color: flavor.base, borderRadius: BorderRadius.circular(12), boxShadow: [
+                      BoxShadow(
+                        color: flavor.crust.withOpacity(0.1),
+                        blurRadius: 4,
+                      ),
+                    ]),
+                    child: ExpansionTile(
+                      leading: CircleAvatar(
+                        backgroundColor: flavor.surface0,
+                        child: Icon(_getCursusIcon(cursusId), color: flavor.text),
+                      ),
+                      collapsedBackgroundColor: Colors.transparent,
+                      backgroundColor: flavor.base,
+                      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      iconColor: flavor.text,
+                      title: Text(
+                        _getCursusName(cursus, cursusId),
+                        style: TextStyle(color: flavor.text, fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      children: projectList.map((project) => _buildProjectTile(context, project, flavor)).toList(),
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
     );
   }
 
